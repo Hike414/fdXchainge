@@ -45,10 +45,10 @@ function Dashboard() {
                             className="bg-white p-6 rounded-lg shadow-md border border-gray-200"
                         >
                             <div className="flex items-center gap-3 mb-4">
-                                <Landmark className="text-blue-600" size={24} />
-                                <h3 className="text-lg font-semibold">FD Token #{token.id.slice(0, 8)}</h3>
+                                <Landmark className="text-purple-600" size={24} />
+                                <h3 className="text-lg  text-black-400 font-semibold">FD Token #{token.id.slice(0, 8)}</h3>
                             </div>
-                            <div className="space-y-2 text-gray-600">
+                            <div className="space-y-2 text-black-600">
                                 <p>Amount: ₹{token.amount.toLocaleString()}</p>
                                 <p>Duration: {token.duration} months</p>
                                 <p>Created: {new Date(token.createdAt).toLocaleDateString()}</p>
