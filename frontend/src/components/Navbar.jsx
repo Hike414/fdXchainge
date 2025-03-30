@@ -1,32 +1,35 @@
 import React from 'react'
-import { BarChart3 } from 'lucide-react'
-const Navbar = () => {
-  return (
-    <nav className="relative px-6 py-4 rounded-lg">
-    <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-lg"></div>
-    <div className="relative flex items-center justify-between">
-      <div className="flex items-center space-x-2">
-        <BarChart3 className="w-8 h-8 text-yellow-300" />
-        <span className="text-white text-xl font-bold">fdXchange</span>
-      </div>
-      
-      <div className="hidden md:flex items-center space-x-8">
-        <a href="#" className="text-white/80 hover:text-white">Trade</a>
-        <a href="#" className="text-white/80 hover:text-white">Markets</a>
-        <a href="#" className="text-white/80 hover:text-white">Portfolio</a>
-        <a href="#" className="text-white/80 hover:text-white">About</a>
-      </div>
+import { useNavigate } from 'react-router-dom'
 
-      <div className="flex items-center space-x-4">
-        <button className="text-white hover:text-white/80">Sign In</button>
-        <button className="bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-white/90">
-          Start Trading
-        </button>
-      </div>
-    </div>
-    {/* Mirror Effect Bottom Border */}
-    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-  </nav>
+const Navbar = () => {
+  const navigate = useNavigate()
+  return (
+    <nav className="relative px-6 py-4 bg-gray-900 bg-opacity-50 backdrop-blur-lg">
+      <div className="absolute inset-0 backdrop-blur-sm"></div>
+      <div className="relative flex items-center justify-between">
+        {/* App Name */}
+        <div className="flex items-center">
+          <span
+            className="text-white text-2xl font-bold cursor-pointer"
+            onClick={() => navigate('/')}
+          >
+            FDXChainge
+          </span>
+        </div>
+
+        
+          <div className="flex items-center">
+            <button
+              onClick={() => navigate('/signin')}
+              className="text-black border-2 rounded-2xl px-5 py-1 text-xl cursor-pointer bg-purple-700 hover:bg-purple-700 transform hover:scale-110 transition-transform duration-200"
+            >
+              Sign In
+            </button>
+          </div>
+              </div>
+              {/* Mirror Effect Bottom Border */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+    </nav>
   )
 }
 
