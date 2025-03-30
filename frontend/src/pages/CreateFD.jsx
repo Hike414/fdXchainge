@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Landmark } from 'lucide-react';
 import bgImage from '../assets/BackgroundImage.png';
 
 function CreateFD() {
+    const navigate = useNavigate();
     const [selectedBank, setSelectedBank] = useState(null);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [amount, setAmount] = useState('');
@@ -25,6 +26,7 @@ function CreateFD() {
 
         const existingTokens = JSON.parse(localStorage.getItem('fdTokens') || '[]');
         localStorage.setItem('fdTokens', JSON.stringify([...existingTokens, newToken]));
+        navigate('/dashboard');
     };
 
     const banks = [
@@ -75,20 +77,23 @@ function CreateFD() {
     ];
 
     return (
-        <div className="min-h-screen bg-[#4169E1] flex items-center justify-center">
+        <div
+            className="min-h-screen bg-cover bg-center"
+            style={{ backgroundImage: `url(${bgImage})` }}
+        >
             <div className="container mx-auto px-4 py-8">
-                <Link
-                    to="/dashboard"
-                    className="mb-6 flex items-center gap-2 text-2xl text-white hover:text-white/90 cursor-pointer"
+                <button
+                    onClick={() => navigate('/dashboard')}
+                    className="mb-6 flex items-center gap-2 text-2xl text-purple-500 hover:text-purple-600 cursor-pointer"
                 >
                     <ArrowLeft size={20} />
                     <span>Back to Dashboard</span>
-                </Link>
+                </button>
 
                 <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-8">
                     <div className="flex items-center gap-3 mb-6">
-                        <Landmark className="text-[#4169E1]" size={28} />
-                        <h1 className="text-2xl font-bold text-[#4169E1]">Create New Fixed Deposit</h1>
+                        <Landmark className="text-blue-600" size={28} />
+                        <h1 className="text-2xl font-bold text-gray-900">Create New Fixed Deposit</h1>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -174,7 +179,7 @@ function CreateFD() {
                         <button
                             type="submit"
                             disabled={!selectedBank || !selectedPlan || !amount || !duration}
-                            className="w-full bg-[#4169E1] text-white py-3 px-6 rounded-lg hover:bg-[#3654B3] transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                            className="w-full bg-purple-500 text-white py-3 px-6 rounded-lg hover:bg-purple-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                         >
                             Create FD
                         </button>

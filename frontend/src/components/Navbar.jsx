@@ -1,63 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
-    const [walletAddress, setWalletAddress] = useState("");
+  const navigate = useNavigate()
+  return (
+    <nav className="relative px-6 py-4 bg-gray-900 bg-opacity-50 backdrop-blur-lg">
+      <div className="absolute inset-0 backdrop-blur-sm"></div>
+      <div className="relative flex items-center justify-between">
+        {/* App Name */}
+        <div className="flex items-center">
+          <span
+            className="text-white text-2xl font-bold cursor-pointer"
+            onClick={() => navigate('/')}
+          >
+            FDXChainge
+          </span>
+        </div>
 
-    const connectWallet = async () => {
-        if (window.ethereum) {
-            try {
-                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-                setWalletAddress(accounts[0]);
-            } catch (error) {
-                console.error("Error connecting to MetaMask:", error);
-            }
-        } else {
-            alert("MetaMask is not installed. Please install it to use this feature.");
-        }
-    };
+        
+          <div className="flex items-center">
+            <button
+              onClick={() => navigate('/signin')}
+              className="text-black border-2 rounded-2xl px-5 py-1 text-xl cursor-pointer bg-purple-700 hover:bg-purple-700 transform hover:scale-110 transition-transform duration-200"
+            >
+              Sign In
+            </button>
+          </div>
+              </div>
+              {/* Mirror Effect Bottom Border */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+    </nav>
+  )
+}
 
-    useEffect(() => {
-        if (window.ethereum) {
-            window.ethereum.on("accountsChanged", (accounts) => {
-                setWalletAddress(accounts[0] || "");
-            });
-        }
-    }, []);
-
-    return (
-        <nav className="relative px-6 py-4 bg-gradient-to-t from-slate-50 to-violet-100 shadow-md ">
-            <div className="relative flex items-center justify-between">
-                {/* App Name */}
-                <div className="flex items-center">
-                    <Link to="/" className="text-blue-600 text-2xl font-bold cursor-pointer">
-                        FDXChainge
-                    </Link>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                    {walletAddress ? (
-                        <span className="text-blue-600 text-sm font-semibold">
-                            {`Wallet: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`}
-                        </span>
-                    ) : (
-                        <button
-                            onClick={connectWallet}
-                            className="text-white text-xl  bg-blue-500 border-2 rounded-2xl px-5 py-1 text-sm cursor-pointer hover:bg-yellow-600 transform hover:scale-110 transition-transform duration-200"
-                        >
-                            Connect MetaMask
-                        </button>
-                    )}
-                    <Link
-                        to="/signin"
-                        className="text-white text-xl  bg-blue-600 border-2 border-blue-600 rounded-2xl px-5 py-1 text-sm cursor-pointer hover:bg-blue-700 transform hover:scale-110 transition-transform duration-200"
-                    >
-                        Sign In
-                    </Link>
-                </div>
-            </div>
-        </nav>
-    );
-};
-
-export default Navbar;
+export default Navbar

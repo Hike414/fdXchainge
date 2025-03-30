@@ -10,14 +10,18 @@ import CreateFD from './pages/CreateFD';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-r from-indigo-500 to-blue-500">
+      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-purple-400">
         <Navbar />
         <Routes>
+          {/* Home Route */}
           <Route path="/" element={<Hero />} />
+          {/* Signup Route */}
           <Route path="/signup" element={<Signup />} />
+          {/* Login Route */}
           <Route path="/signin" element={<Signin />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/create-fd" element={<CreateFD />} />
+          {/* <Route path="/marketplace" element={<Marketplace />} /> */}
         </Routes>
       </div>
     </Router>
