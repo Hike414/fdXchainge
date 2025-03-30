@@ -26,7 +26,7 @@ function CreateFD() {
 
         const existingTokens = JSON.parse(localStorage.getItem('fdTokens') || '[]');
         localStorage.setItem('fdTokens', JSON.stringify([...existingTokens, newToken]));
-        navigate('/');
+        navigate('/dashboard');
     };
 
     const banks = [
