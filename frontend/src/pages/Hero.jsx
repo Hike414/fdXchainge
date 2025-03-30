@@ -1,53 +1,50 @@
-import React from 'react'
-import bgImage from '../assets/BackgroundImage.png'
+import React from 'react';
+
 const Hero = () => {
   return (
-    <div
-      className="bg-cover bg-center"
-      style={{ backgroundImage: `url(${bgImage})` }}
-    >
+    <div className="bg-gradient-to-r from-indigo-500 to-blue-500 min-h-screen mt-5">
       <div className="container mx-auto px-6 pt-20 pb-12">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="inline-block px-4 py-2 rounded-full text-yellow-300 mb-6">
-              Revolutionary Trading Platform
+            <div className="inline-block px-4 py-2 rounded-full text-white mb-6">
+              # Revolutionary Trading Platform
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 className="text-6xl md:text-6xl font-bold text-white leading-tight mb-6">
               Why Break When You Can{' '}
-              <span className="bg-gradient-to-r from-yellow-300 via-purple-300 to-yellow-300 text-transparent bg-clip-text">
+              <span className="bg-white text-[#4169E1] px-2 py-0 rounded">
                 Trade?
               </span>
             </h1>
-            <p className="text-white/80 text-lg mb-8">
+            <p className="text-white text-lg mb-8">
               Join the next generation of traders who are breaking free from traditional constraints. Trade smarter, faster, and with more confidence.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-white text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-white/90">
+              <button className="bg-white text-[#4169E1] text-2xl px-6 py-3 rounded-lg font-medium hover:bg-white/90">
                 Start Trading Now →
               </button>
-              <button className="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10">
+              <button className="border border-white text-2xl  text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10">
                 View Markets →
               </button>
             </div>
           </div>
 
           {/* FD Investment Section */}
-          <div className="bg-white backdrop-blur-lg rounded-2xl p-8">
+          <div className="bg-white rounded-2xl p-8">
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-500 to-purple-700 mb-4">
-                The right time to invest in FDs is <span className="text-purple-300">now</span>
+              <h2 className="text-4xl font-bold text-[#4169E1] mb-4">
+                The right time to invest in FDs is <span className="text-[#4169E1]">now</span>
               </h2>
-              <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-500 to-purple-700 text-lg mb-6">
+              <p className="text-[#4169E1] text-lg mb-6">
                 Secure your FD rates now before they drop
               </p>
-              <button className=" hover:bg-purple-500 text-white px-8 py-3 rounded-full font-medium transition-colors">
+              <button className="bg-[#4169E1] hover:bg-[#4169E1]/90 text-white px-8 py-3 rounded-full font-medium transition-colors">
                 Invest now to lock-in FD rates
               </button>
             </div>
 
             <div className="relative mt-12 pt-8">
               {/* Graph Points */}
-              <div className="absolute right-4 top-0 text-purple-300 text-right">
+              <div className="absolute right-4 top-0 text-[#4169E1] text-right">
                 <div className="text-2xl font-bold flex items-center gap-2">
                   NOW <span className="inline-block">✨</span>
                 </div>
@@ -61,16 +58,14 @@ const Hero = () => {
                   <defs>
                     <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                       <stop offset="0%" stopColor="white" stopOpacity="0.1" />
-                      <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.05" />
+                      <stop offset="100%" stopColor="#4169E1" stopOpacity="0.05" />
                     </linearGradient>
                     <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#ff69b4" />
-                      <stop offset="50%" stopColor="#9f7aea" />
-                      <stop offset="100%" stopColor="#a78bfa" />
+                      <stop offset="0%" stopColor="#4169E1" />
+                      <stop offset="50%" stopColor="#4169E1" />
+                      <stop offset="100%" stopColor="#4169E1" />
                     </linearGradient>
                   </defs>
-
-                  
                   
                   {/* Grid Lines */}
                   <g className="opacity-20">
@@ -81,7 +76,7 @@ const Hero = () => {
                         y1={i * 20}
                         x2="400"
                         y2={i * 20}
-                        stroke="white"
+                        stroke="#4169E1"
                         strokeWidth="0.5"
                         strokeDasharray="4 4"
                       />
@@ -105,7 +100,7 @@ const Hero = () => {
                 </svg>
                 
                 {/* Years */}
-                <div className="absolute bottom-0 left-0 right-0 flex justify-between text-white/60 mt-4">
+                <div className="absolute bottom-0 left-0 right-0 flex justify-between text-[#4169E1]/60 mt-4">
                   <span>2007</span>
                   <span>2012</span>
                   <span>2016</span>
@@ -113,15 +108,12 @@ const Hero = () => {
                   <span>NOW</span>
                 </div>
               </div>
-              
-              {/* Graph Glow Effect */}
-              <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-300/30 rounded-full blur-xl"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
