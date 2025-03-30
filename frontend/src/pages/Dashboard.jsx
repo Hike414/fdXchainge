@@ -37,6 +37,9 @@ function Dashboard() {
                     <PlusCircle size={20} />
                     Create New FD
                 </button>
+                <div className="mb-8">
+                    <h1 className="text-3xl font-bold text-purple-400">My FD Tokens</h1>
+                </div>
 
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {fdTokens.map((token) => (
@@ -47,6 +50,11 @@ function Dashboard() {
                             <div className="flex items-center gap-3 mb-4">
                                 <Landmark className="text-purple-600" size={24} />
                                 <h3 className="text-lg  text-black-400 font-semibold">FD Token #{token.id.slice(0, 8)}</h3>
+                                <div>
+                                    <button className="ml-20 flex items-center cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors">
+                                        Fractionlize
+                                    </button>
+                                </div>
                             </div>
                             <div className="space-y-2 text-black-600">
                                 <p>Amount: ₹{token.amount.toLocaleString()}</p>
