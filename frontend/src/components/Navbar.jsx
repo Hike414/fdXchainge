@@ -21,7 +21,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <button
               onClick={() => navigate('/signin')}
-              className="text-black border-2 rounded-2xl px-5 py-1 text-xl cursor-pointer bg-purple-700 hover:bg-purple-700 transform hover:scale-110 transition-transform duration-200"
+              className="text-white rounded-2xl px-5 py-1 text-xl cursor-pointer bg-purple-500 hover:bg-purple-600 transform hover:scale-110 transition-transform duration-200"
             >
               Sign In
             </button>

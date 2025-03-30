@@ -51,7 +51,10 @@ function Dashboard() {
                                 <Landmark className="text-purple-600" size={24} />
                                 <h3 className="text-lg  text-black-400 font-semibold">FD Token #{token.id.slice(0, 8)}</h3>
                                 <div>
-                                    <button className="ml-20 flex items-center cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors">
+                                    <button onClick={()=>
+                                        navigate("/fractionalise")
+                                    }
+                                     className="ml-20 flex items-center cursor-pointer bg-purple-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors">
                                         Fractionlize
                                     </button>
                                 </div>
@@ -70,6 +73,9 @@ function Dashboard() {
                             <p className="text-gray-500">No FD tokens yet. Create your first FD!</p>
                         </div>
                     )}
+                </div>
+                <div className="mb-8">
+                    <h1 className="text-3xl pt-6 font-bold text-purple-400">My FFD Tokens</h1>
                 </div>
             </div>
         </div>
