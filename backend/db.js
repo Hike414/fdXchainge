@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const { string, number } = require("zod");
 
+// mongoose.connect("mongodb+srv://Rahul:Rahul6255@cluster0.uera1.mongodb.net/fdxchainge")
 
 const userSchema = new mongoose.Schema({
     username: {
