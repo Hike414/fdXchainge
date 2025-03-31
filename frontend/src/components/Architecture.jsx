@@ -21,7 +21,7 @@ export function Architecture() {
       <div className="container mx-auto px-6"> {/* Adjusted padding */}
         <div className="text-center mb-20"> {/* Increased margin */}
           <h2 className="text-5xl font-bold mb-6 text-white"> {/* Increased font size */}
-            How FDXchange Works
+            How FDX<span className='text-5xl text-purple-600'>Chainge</span>works
           </h2>
           <p className="text-2xl text-purple-200"> {/* Increased font size */}
             Understanding the complete flow of our FD trading platform
