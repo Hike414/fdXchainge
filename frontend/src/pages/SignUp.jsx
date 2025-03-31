@@ -1,9 +1,13 @@
-import React from "react";
+import {React,useState} from "react";
 import bgImage from "../assets/BackgroundImage.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const SignupForm = () => {
     const navigate = useNavigate();
-
+    const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
+    const [fullname,setFullName] = useState("");
+    const [confirmPass,setConfirmPass] = useState("");
     return (
         <div
             className="h-screen flex justify-center items-center bg-cover bg-center"
@@ -16,7 +20,10 @@ const SignupForm = () => {
                 <form>
                     <div className="mb-4">
                         <label className="text-purple-300 block mb-1">Full Name</label>
-                        <input
+                        <input 
+                            onchange = {e=>{
+                                setFullName(e.target.value)
+                            }}
                             type="text"
                             placeholder="Rahul Misala"
                             className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
@@ -34,6 +41,9 @@ const SignupForm = () => {
                         <div className="w-1/2">
                             <label className="text-purple-300 block mb-1">Password</label>
                             <input
+                                onchange = {e=>{
+                                    setPassword(e.target.value)
+                                }}
                                 type="password"
                                 placeholder="********"
                                 className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
@@ -42,6 +52,9 @@ const SignupForm = () => {
                         <div className="w-1/2">
                             <label className="text-purple-300 block mb-1">Confirm Password</label>
                             <input
+                                onchange = {e=>{
+                                    setConfirmPass(e.target.value)
+                                }}
                                 type="password"
                                 placeholder="********"
                                 className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
@@ -49,7 +62,15 @@ const SignupForm = () => {
                             />
                         </div>
                     </div>
-                    <button className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition duration-300">
+                    <button onClick = {async ()=>{
+                        if(password == confirmPass){
+                            const response = await axios.post("http://localhost:3000/api/v1/user/signup",{
+                                username,
+                                password,
+                                fullname
+                            });
+                        }
+                    }} className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition duration-300">
                         Create Account
                     </button>
                     <div className="text-center text-purple-300 mt-4">Or</div>
