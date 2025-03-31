@@ -4,24 +4,22 @@ import { useNavigate } from 'react-router-dom'
 const Navbar = () => {
   const navigate = useNavigate()
   return (
-    <nav className="relative px-6 py-4 bg-[#0D1321] bg-opacity-50 backdrop-blur-lg">
+    <nav className="relative px-6 py-4 bg-purple-900/40 backdrop-blur-lg border-white">
       <div className="absolute inset-0 backdrop-blur-sm"></div>
       <div className="relative flex items-center justify-between">
         {/* App Name */}
-        <div className="flex items-center">
+        <div className="flex items-center px-12">
           <span
-            className="text-white text-2xl font-bold cursor-pointer"
+            className=" text-2xl font-bold cursor-pointer px-8 py-2 text-white"
             onClick={() => navigate('/')}
           >
             FDXChainge
           </span>
         </div>
-
-        
           <div className="flex items-center">
             <button
               onClick={() => navigate('/signin')}
-              className="text-white rounded-2xl px-5 py-1 text-xl cursor-pointer bg-purple-500 hover:bg-purple-600 transform hover:scale-110 transition-transform duration-200"
+              className="text-purple rounded-2xl px-5 py-1 text-xl cursor-pointer bg-white hover:bg-white transform hover:scale-110 transition-transform duration-200"
             >
               Sign In
             </button>

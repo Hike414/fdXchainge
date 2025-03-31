@@ -1,25 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import bgImage from '../assets/BackgroundImage.png'
+import { HowItWorks } from '../components/HowItWorks'
+import { Architecture } from '../components/Architecture'
+import Footer from '../components/Footer';
+
 const Hero = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      setMousePosition({
+        x: (event.clientX / window.innerWidth - 0.5) * 20,
+        y: (event.clientY / window.innerHeight - 0.5) * 20,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <div
-      className="bg-cover bg-center"
-      style={{ backgroundImage: `url(${bgImage})` }}
+      className="bg-cover bg-center bg-gradient-to-br from-purple-950 to-black"
     >
       <div className="container mx-auto px-6 pt-20 pb-12">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="inline-block px-4 py-2 rounded-full text-yellow-300 mb-6">
-              Revolutionary Trading Platform
+            <div className="inline-block text-xl px-3 py-2  text-white mb-6">
+               Where your money grows steadily, securely, and smartly
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
               Why Break When You Can{' '}
-              <span className="bg-gradient-to-r from-yellow-300 via-purple-300 to-yellow-300 text-transparent bg-clip-text">
-                Trade?
-              </span>
+              <span className="text-purple-500 rounded-lg bg-white px-3">Trade?</span>
             </h1>
             <p className="text-white/80 text-lg mb-8">
-              Join the next generation of traders who are breaking free from traditional constraints. Trade smarter, faster, and with more confidence.
+              Join the next generation of traders breaking free from traditional constraints. With fractionalized FDs, invest in smaller portions to diversify and maximize returns.
             </p>
             <div className="flex flex-wrap gap-4">
               <button className="bg-white text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-white/90">
@@ -32,16 +47,22 @@ const Hero = () => {
           </div>
 
           {/* FD Investment Section */}
-          <div className="bg-white backdrop-blur-lg rounded-2xl p-8">
+          <div
+            className="bg-white backdrop-blur-lg rounded-2xl p-8"
+            style={{
+              transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+              transition: 'transform 0.1s ease-out',
+            }}
+          >
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-500 to-purple-700 mb-4">
-                The right time to invest in FDs is <span className="text-purple-300">now</span>
+              <h2 className="text-4xl font-bold text-purple-500  mb-4">
+                The right time to invest in FDs is <span className="text-purple-500">now</span>
               </h2>
               <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-500 to-purple-700 text-lg mb-6">
-                Secure your FD rates now before they drop
+                 The Fd's Market is getting hotter, and so are the rates! <br />
               </p>
-              <button className=" hover:bg-purple-500 text-white px-8 py-3 rounded-full font-medium transition-colors">
-                Invest now to lock-in FD rates
+              <button className="  bg-purple-500 hover:bg-purple-500 text-white px-8 py-3 rounded-full font-medium transition-colors">
+                  Invest Now
               </button>
             </div>
 
@@ -53,11 +74,10 @@ const Hero = () => {
                 </div>
                 <div className="text-4xl font-bold">9.10%</div>
               </div>
-              
+
               {/* Graph */}
               <div className="relative h-64 mt-8">
                 <svg className="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="none">
-                  {/* Graph Background Gradient */}
                   <defs>
                     <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                       <stop offset="0%" stopColor="white" stopOpacity="0.1" />
@@ -70,8 +90,6 @@ const Hero = () => {
                     </linearGradient>
                   </defs>
 
-                  
-                  
                   {/* Grid Lines */}
                   <g className="opacity-20">
                     {[...Array(10)].map((_, i) => (
@@ -87,25 +105,25 @@ const Hero = () => {
                       />
                     ))}
                   </g>
-                  
+
                   {/* Main Graph Line */}
                   <path
                     d="M0,100 C50,80 100,120 150,90 S200,140 250,110 S300,60 350,30 S400,10 400,10"
                     fill="none"
                     stroke="url(#lineGradient)"
-                    strokeWidth="3"
+                    strokeWidth="4"
                   />
-                  
+
                   {/* Data Points */}
-                  <circle cx="0" cy="100" r="4" fill="url(#lineGradient)" />
-                  <circle cx="150" cy="90" r="4" fill="url(#lineGradient)" />
-                  <circle cx="250" cy="110" r="4" fill="url(#lineGradient)" />
-                  <circle cx="350" cy="30" r="4" fill="url(#lineGradient)" />
-                  <circle cx="400" cy="10" r="6" fill="url(#lineGradient)" className="animate-pulse" />
+                  <circle cx="0" cy="100" r="6" fill="url(#lineGradient)" />
+                  <circle cx="150" cy="90" r="6" fill="url(#lineGradient)" />
+                  <circle cx="250" cy="110" r="6" fill="url(#lineGradient)" />
+                  <circle cx="350" cy="30" r="6" fill="url(#lineGradient)" />
+                  <circle cx="400" cy="10" r="8" fill="url(#lineGradient)" className="animate-pulse" />
                 </svg>
-                
+
                 {/* Years */}
-                <div className="absolute bottom-0 left-0 right-0 flex justify-between text-white/60 mt-4">
+                <div className="absolute bottom-0 left-0 right-0 flex justify-between text-white/80 mt-4">
                   <span>2007</span>
                   <span>2012</span>
                   <span>2016</span>
@@ -113,15 +131,18 @@ const Hero = () => {
                   <span>NOW</span>
                 </div>
               </div>
-              
+
               {/* Graph Glow Effect */}
-              <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-300/30 rounded-full blur-xl"></div>
+              <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-300/40 rounded-full blur-xl"></div>
             </div>
           </div>
         </div>
       </div>
+      {/* <HowItWorks></HowItWorks> */}
+            <Architecture></Architecture>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

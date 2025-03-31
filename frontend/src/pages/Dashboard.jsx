@@ -16,17 +16,17 @@ function Dashboard() {
 
     return (
         <div
-            className="min-h-screen"
-            style={{
-                backgroundImage: `url(${bgImage})`,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-            }}
+            className="min-h-screen bg-gradient-to-br from-purple-950 to-black"
+            // style={{
+            //     backgroundImage: `url(${bgImage})`,
+            //     backgroundSize: 'cover',
+            //     backgroundRepeat: 'no-repeat',
+            //     backgroundPosition: 'center',
+            // }}
         >
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-purple-400">Welcome to Your FD Dashboard</h1>
+                    <h1 className="text-3xl font-bold text-white">Welcome back "Siddharth"</h1>
                     <p className="mt-2 text-purple-400">Manage your fixed deposits and create new ones</p>
                 </div>
                 <div className='flex justify-between gap-4'>
