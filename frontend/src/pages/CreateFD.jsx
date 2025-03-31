@@ -90,19 +90,19 @@ function CreateFD() {
                     <span>Back to Dashboard</span>
                 </button>
 
-                <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-8">
+                <div className="max-w-2xl mx-auto bg-[#0D1321] rounded-xl shadow-md p-8">
                     <div className="flex items-center gap-3 mb-6">
                         <Landmark className="text-blue-600" size={28} />
-                        <h1 className="text-2xl font-bold text-gray-900">Create New Fixed Deposit</h1>
+                        <h1 className="text-2xl font-bold text-white">Create New Fixed Deposit</h1>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <label className="block text-sm font-medium text-white mb-2">
                                 Select Bank
                             </label>
                             <select
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                className="w-full p-3 border dark:bg-[#0D1321] dark:border-gray-300 border-white rounded-lg focus:ring-2 focus:ring-purple-500 text-white"
                                 value={selectedBank?.id || ''}
                                 onChange={(e) => {
                                     const bank = banks.find((b) => b.id === e.target.value);
@@ -121,11 +121,11 @@ function CreateFD() {
 
                         {selectedBank && (
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-white mb-2">
                                     Select Plan
                                 </label>
                                 <select
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-3 border  dark:bg-[#0D1321] dark:border-gray-300 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-white"
                                     value={selectedPlan?.id || ''}
                                     onChange={(e) => {
                                         const plan = selectedBank.plans.find((p) => p.id === e.target.value);
@@ -145,7 +145,7 @@ function CreateFD() {
                         {selectedPlan && (
                             <>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         Amount (₹)
                                     </label>
                                     <input
@@ -154,24 +154,27 @@ function CreateFD() {
                                         step="1000"
                                         value={amount}
                                         onChange={(e) => setAmount(e.target.value)}
-                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-white"
                                         placeholder={`Minimum ₹${selectedPlan.minAmount}`}
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         Duration (months)
                                     </label>
-                                    <input
-                                        type="number"
-                                        min={selectedPlan.minDuration}
-                                        max={selectedPlan.maxDuration}
+                                    <select
                                         value={duration}
                                         onChange={(e) => setDuration(e.target.value)}
-                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                        placeholder={`${selectedPlan.minDuration}-${selectedPlan.maxDuration} months`}
-                                    />
+                                        className="w-full p-3 border dark:bg-[#0D1321] dark:border-gray-300 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-white"
+                                    >
+                                        <option value="">Select duration</option>
+                                        {[6, 12, 18, 24, 30, 36].map((d) => (
+                                            <option key={d} value={d}>
+                                                {d} months
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </>
                         )}

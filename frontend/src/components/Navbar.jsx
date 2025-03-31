@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const Navbar = () => {
   const navigate = useNavigate()
   return (
-    <nav className="relative px-6 py-4 bg-gray-900 bg-opacity-50 backdrop-blur-lg">
+    <nav className="relative px-6 py-4 bg-[#0D1321] bg-opacity-50 backdrop-blur-lg">
       <div className="absolute inset-0 backdrop-blur-sm"></div>
       <div className="relative flex items-center justify-between">
         {/* App Name */}
