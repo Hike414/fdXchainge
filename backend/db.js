@@ -64,29 +64,29 @@ const FDtokenSchema = new mongoose.Schema({
         }
     }]
 });
-// const FFDTokenSchema = new mongoose.Schema ({
-//     user :{
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: 'User',
-//         required: true
-//     },
-//     FDTokenId :{
-//         type : mongoose.Schema.Types.ObjectId,
-//         ref: 'FDToken.FDTokens.tokenID'
-//     },
-//     tokenName : {
-//         type : string,
-//         required : true,
-//     },
-//     volume : {
-//         type : number,
-//         required : true,
-//     },
-//     image : {
-//         type : image,
-//         required : true,
-//     }
-// })
+const FFDTokenSchema = new mongoose.Schema ({
+    user :{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    FDTokenId :{
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'FDToken.FDTokens.tokenID'
+    },
+    tokenName : {
+        type : String,
+        required : true,
+    },
+    volume : {
+        type : Number,
+        required : true,
+    },
+    image : {
+        type : Buffer,
+        required : true,
+    }
+})
 // const listedTokenSchema = new mongoose.Schema({
 //     tokenID : {
 //         type: String,
@@ -116,9 +116,11 @@ const FDtokenSchema = new mongoose.Schema({
 // })
 const User = new mongoose.model("User",userSchema)
 const FDToken = new mongoose.model("FDToken",FDtokenSchema)
+const FFDToken = new mongoose.model("FFDToken",FFDTokenSchema)
 // const listedToken = new mongoose.model("listedToken",listedTokenSchema)
 
 module.exports = {
     User,
     FDToken,
+    FFDToken,
 };

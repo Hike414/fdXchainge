@@ -2,9 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PlusCircle, Landmark ,ShoppingBagIcon} from 'lucide-react';
 import bgImage from '../assets/BackgroundImage.png';
-
+import axios from 'axios';
 function Dashboard() {
     const navigate = useNavigate();
+    const [fullName, setFullName] = useState('');
+    
+    useEffect(() => {
+        const fetchFullName = async () => {
+            const saved = localStorage.getItem('username');
+            if (saved) {
+                try {
+                    const response = await axios.get('http://localhost:3000/api/v1/user/getUser', {
+                        params: {
+                            username: saved,
+                        },
+                    });
+                    console.log(response.data);
+                    if (response.status === 200) {
+                        setFullName(response.data.fullName);
+                    } else {
+                        console.error('Unexpected response:', response);
+                        alert('An error occurred. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                    alert('An error occurred. Please try again.');
+                }
+            }
+        };
+        fetchFullName();
+    }, []);
     const [fdTokens, setFdTokens] = useState(() => {
         const saved = localStorage.getItem('fdTokens');
         return saved ? JSON.parse(saved) : [];
@@ -26,7 +53,7 @@ function Dashboard() {
         >
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-white">Welcome back "Siddharth"</h1>
+                    <h1 className="text-3xl font-bold text-white">Welcome back {fullName}</h1>
                     <p className="mt-2 text-purple-400">Manage your fixed deposits and create new ones</p>
                 </div>
                 <div className='flex justify-between gap-4'>
