@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const { string, number } = require("zod");
 
+mongoose.connect("mongodb+srv://Rahul:Rahul6255@cluster0.uera1.mongodb.net/fdxchainge")
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -36,7 +37,6 @@ const FDtokenSchema = new mongoose.Schema({
         tokenID: {
             type: String,
             required: true,
-            unique : true
         },
         amount: {
             type: Number,
@@ -70,22 +70,30 @@ const FFDTokenSchema = new mongoose.Schema ({
         ref: 'User',
         required: true
     },
-    FDTokenId :{
-        type : mongoose.Schema.Types.ObjectId,
-        ref: 'FDToken.FDTokens.tokenID'
-    },
-    tokenName : {
-        type : String,
-        required : true,
-    },
-    volume : {
-        type : Number,
-        required : true,
-    },
-    image : {
-        type : Buffer,
-        required : true,
-    }
+    FFDTokens : [{
+        FDTokenId :{
+            type : String,
+            required : true
+        },
+        tokenName : {
+            type : String,
+            required : true,
+        },
+        volume : {
+            type : Number,
+            required : true,
+        },
+        image : {
+            filename : {
+                type : String,
+                required : true,
+            },
+            path : {
+                type : String,
+                required : true,
+            }
+        }
+    }]
 })
 // const listedTokenSchema = new mongoose.Schema({
 //     tokenID : {

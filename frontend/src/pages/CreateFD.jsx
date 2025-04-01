@@ -1,32 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import { ArrowLeft, Landmark } from 'lucide-react';
 import bgImage from '../assets/BackgroundImage.png';
-
+import axios from "axios";
 function CreateFD() {
     const navigate = useNavigate();
     const [selectedBank, setSelectedBank] = useState(null);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [amount, setAmount] = useState('');
     const [duration, setDuration] = useState('');
+    const [userID, setUserID] = useState('');
+    
+    useEffect(() => {
+        const fetchFullName = async () => {
+            const saved = localStorage.getItem('username');
+            if (saved) {
+                try {
+                    const response = await axios.get('http://localhost:3000/api/v1/user/getUser', {
+                        params: {
+                            username: saved,
+                        },
+                    });
+                    console.log(response.data);
+                    if (response.status === 200) {
+                        setUserID(response.data.userId);
+                    } else {
+                        console.error('Unexpected response:', response);
+                        alert('An error occurred. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                    alert('An error occurred. Please try again.');
+                }
+            }
+        };
+        fetchFullName();
+    }, []);
 
-    const handleSubmit = (e) => {
+    const  handleSubmit = async (e) => {
         e.preventDefault();
+        
         if (!selectedBank || !selectedPlan || !amount || !duration) return;
 
-        const newToken = {
-            id: crypto.randomUUID(),
-            bankId: selectedBank.id,
-            planId: selectedPlan.id,
-            amount: parseFloat(amount),
-            duration: parseInt(duration),
-            createdAt: new Date(),
-            maturityDate: new Date(Date.now() + parseInt(duration) * 30 * 24 * 60 * 60 * 1000),
-        };
+            try {
 
-        const existingTokens = JSON.parse(localStorage.getItem('fdTokens') || '[]');
-        localStorage.setItem('fdTokens', JSON.stringify([...existingTokens, newToken]));
-        navigate('/dashboard');
+                const response = await axios.put("http://localhost:3000/api/v1/fd/update-fd/" + userID, {
+                    tokenID: `${selectedPlan.id}-${duration}`,
+                    amount: amount.toString(),
+                    bank: selectedBank.name,
+                    plan: selectedPlan.name,
+                    interestRate: selectedPlan.interestRate.toString(),
+                    duration: duration.toString(),
+                });
+                console.log('FD created successfully:', response.data);
+                navigate('/dashboard');
+            } catch (error) {
+                console.log(userID)
+                console.log(amount)
+                console.log(duration)
+                console.log(selectedBank)
+                
+                console.log(selectedPlan)
+                console.error('Error creating FD:', error.response?.data || error.message);
+                alert('Failed to create FD. Please check the details and try again.');
+            }
+
+        // const newToken = {
+        //     id: crypto.randomUUID(),
+        //     bankId: selectedBank.id,
+        //     planId: selectedPlan.id,
+        //     amount: parseFloat(amount),
+        //     duration: parseInt(duration),
+        //     createdAt: new Date(),
+        //     maturityDate: new Date(Date.now() + parseInt(duration) * 30 * 24 * 60 * 60 * 1000),
+        // };
+
+        // const existingTokens = JSON.parse(localStorage.getItem('fdTokens') || '[]');
+        // localStorage.setItem('fdTokens', JSON.stringify([...existingTokens, newToken]));
     };
 
     const banks = [
@@ -35,7 +86,7 @@ function CreateFD() {
             name: 'HDFC Bank',
             plans: [
                 {
-                    id: 'hdfc-basic',
+                    id: 'HDFC-basic',
                     name: 'Basic FD',
                     interestRate: 5.5,
                     minDuration: 6,
@@ -43,7 +94,7 @@ function CreateFD() {
                     minAmount: 10000,
                 },
                 {
-                    id: 'hdfc-premium',
+                    id: 'HDFC-premium',
                     name: 'Premium FD',
                     interestRate: 6.5,
                     minDuration: 12,
@@ -57,7 +108,7 @@ function CreateFD() {
             name: 'State Bank of India',
             plans: [
                 {
-                    id: 'sbi-regular',
+                    id: 'SBI-Regular',
                     name: 'Regular FD',
                     interestRate: 5.75,
                     minDuration: 6,
@@ -65,8 +116,74 @@ function CreateFD() {
                     minAmount: 5000,
                 },
                 {
-                    id: 'sbi-gold',
-                    name: 'Gold FD',
+                    id: 'SBI-Premium',
+                    name: 'Premium FD',
+                    interestRate: 6.75,
+                    minDuration: 12,
+                    maxDuration: 36,
+                    minAmount: 50000,
+                },
+            ],
+        },
+        {
+            id: 'kotak',
+            name: 'Kotak Mahindra Bank',
+            plans: [
+                {
+                    id: 'KTK-Regular',
+                    name: 'Regular FD',
+                    interestRate: 6.75,
+                    minDuration: 6,
+                    maxDuration: 18,
+                    minAmount: 5000,
+                },
+                {
+                    id: 'KTK-Premium',
+                    name: 'Premium FD',
+                    interestRate: 8,
+                    minDuration: 12,
+                    maxDuration: 36,
+                    minAmount: 50000,
+                },
+            ],
+        },
+        {
+            id: 'axis',
+            name: 'AXIS Bank',
+            plans: [
+                {
+                    id: 'AXIS-Regular',
+                    name: 'Regular FD',
+                    interestRate: 6,
+                    minDuration: 6,
+                    maxDuration: 18,
+                    minAmount: 5000,
+                },
+                {
+                    id: 'AXIS-Premium',
+                    name: 'Premium FD',
+                    interestRate: 7.25,
+                    minDuration: 12,
+                    maxDuration: 36,
+                    minAmount: 50000,
+                },
+            ],
+        },
+        {
+            id: 'icici',
+            name: 'ICICI Bank',
+            plans: [
+                {
+                    id: 'ICICI-Regular',
+                    name: 'Regular FD',
+                    interestRate: 5.5,
+                    minDuration: 6,
+                    maxDuration: 18,
+                    minAmount: 5000,
+                },
+                {
+                    id: 'SBI-Premium',
+                    name: 'Premium FD',
                     interestRate: 6.75,
                     minDuration: 12,
                     maxDuration: 36,
@@ -182,7 +299,7 @@ function CreateFD() {
                         <button
                             type="submit"
                             disabled={!selectedBank || !selectedPlan || !amount || !duration}
-                            className="w-full bg-purple-500 text-white py-3 px-6 rounded-lg hover:bg-purple-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                            className="w-full bg-purple-500 cursor-pointer text-white py-3 px-6 rounded-lg hover:bg-purple-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                         >
                             Create FD
                         </button>

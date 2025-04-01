@@ -1,6 +1,6 @@
 const express = require("express")
 const zod = require("zod")
-const { User } = require("../db")
+const { User, FDToken ,FFDToken} = require("../db")
 const jwt = require("jsonwebtoken")
 const JWT_SECRET = require("../config")
 const router = express.Router()
@@ -35,7 +35,14 @@ router.post('/signup', async (req, res) => {
 
         const dbUser = await User.create(body)
         const userId = dbUser._id
-
+        await FDToken.create({
+            user: userId,
+            FDTokens: [],
+        })
+        await FFDToken.create({
+            user: userId,
+            FFDTokens: [],
+        })
         const token = jwt.sign({
             userId: dbUser._id
         }, JWT_SECRET)
@@ -113,7 +120,8 @@ router.get('/getUser', async (req, res) => {
         }
 
         res.json({
-            fullName: user.fullName
+            fullName: user.fullName,
+            userId : user._id,
         });
     } catch (error) {
         res.status(500).json({
