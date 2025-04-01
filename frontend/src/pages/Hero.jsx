@@ -30,7 +30,7 @@ const Hero = () => {
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
               Why Break When You Can{' '}
-              <span className="text-purple-500 rounded-lg bg-white px-3">Trade?</span>
+              <span className="text-purple-700 rounded-lg bg-white px-3">Trade?</span>
             </h1>
             <p className="text-white/80 text-lg mb-8">
               Join the next generation of traders breaking free from traditional constraints. With fractionalized FDs, invest in smaller portions to diversify and maximize returns.
@@ -122,7 +122,7 @@ const Hero = () => {
                   {/* Interest Rate Labels */}
                   <text x="30" y="70" fill="#6b46c1" fontSize="12" textAnchor="middle">5.00%</text>
                   <text x="150" y="70" fill="#6b46c1" fontSize="12" textAnchor="middle">6.50%</text>
-                  <text x="250" y="90" fill="#6b46c1" fontSize="12" textAnchor="middle">7.20%</text>
+                  <text x="250" y="90" fill="#6b46c1" fontSize="12" textAnchor="middle">4.20%</text>
                   {/* <text x="350" y="10" fill="#6b46c1" fontSize="12" textAnchor="middle">8.00%</text> */}
                   <text x="400" y="0" fill="#6b46c1" fontSize="12" textAnchor="middle">9.10%</text>
                 </svg>
