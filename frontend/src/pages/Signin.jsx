@@ -53,6 +53,7 @@ const Signin = () => {
                   }
                 );
                 if (response.status === 200) {
+                  localStorage.setItem("username", username);
                   navigate("/dashboard");
                 } else {
                   console.error("Unexpected response:", response);

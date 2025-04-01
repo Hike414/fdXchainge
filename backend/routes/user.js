@@ -92,4 +92,35 @@ router.post('/signin', async (req, res) => {
     }
 })
 
+router.get('/getUser', async (req, res) => {
+    try {
+        const username = req.query.username;
+
+        if (!username) {
+            return res.status(400).json({
+            message: "Username is required"
+            });
+        }
+
+        const user = await User.findOne({
+            username: username,
+        });
+
+        if (!user) {
+            return res.status(404).json({
+            message: "User not found"
+            });
+        }
+
+        res.json({
+            fullName: user.fullName
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Internal Server Error",
+            error: error.message
+        })
+    }
+})
+
 module.exports = router

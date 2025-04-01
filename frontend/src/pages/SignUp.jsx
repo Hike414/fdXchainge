@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import bgImage from "../assets/BackgroundImage.png";
+import { FaUser, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -26,16 +27,19 @@ const SignupForm = () => {
                             onChange={(e) => {
                                 setFullName(e.target.value);
                             }}
+                            placeholder="Full Name"
                             type="text"
                             className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-4">
                         <label className="text-purple-300 block mb-1">Username</label>
+                    
                         <input
                             onChange={(e) => {
                                 setUsername(e.target.value);
                             }}
+                            placeholder="Username"
                             type="text"
                             className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
                         />
@@ -74,6 +78,7 @@ const SignupForm = () => {
                                     fullName,
                                 });
                                 if (response.status === 201 || response.status === 200) {
+                                    localStorage.setItem("username", username);
                                     navigate("/dashboard");
                                 } else {
                                     console.error("Unexpected response:", response);
@@ -99,7 +104,7 @@ const SignupForm = () => {
                                 alert("An error occurred while navigating. Please try again.");
                             }
                         }}
-                        className="w-full bg-white text-black font-semibold py-3 rounded-lg mt-2"
+                        className="w-full bg-white cursor-pointer text-black font-semibold py-3 rounded-lg mt-2"
                     >
                         Sign in
                     </button>
