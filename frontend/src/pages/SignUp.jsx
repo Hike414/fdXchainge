@@ -1,13 +1,15 @@
-import {React,useState} from "react";
+import { React, useState } from "react";
 import bgImage from "../assets/BackgroundImage.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 const SignupForm = () => {
     const navigate = useNavigate();
-    const [username,setUsername] = useState("");
-    const [password,setPassword] = useState("");
-    const [fullname,setFullName] = useState("");
-    const [confirmPass,setConfirmPass] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [fullName, setFullName] = useState("");
+    const [confirmPass, setConfirmPass] = useState("");
+
     return (
         <div
             className="h-screen flex justify-center items-center bg-cover bg-center"
@@ -20,20 +22,21 @@ const SignupForm = () => {
                 <form>
                     <div className="mb-4">
                         <label className="text-purple-300 block mb-1">Full Name</label>
-                        <input 
-                            onchange = {e=>{
-                                setFullName(e.target.value)
+                        <input
+                            onChange={(e) => {
+                                setFullName(e.target.value);
                             }}
                             type="text"
-                            placeholder="Rahul Misala"
                             className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="text-purple-300 block mb-1">Email Address</label>
+                        <label className="text-purple-300 block mb-1">Username</label>
                         <input
-                            type="email"
-                            placeholder="Rahulmisala@gmail.com"
+                            onChange={(e) => {
+                                setUsername(e.target.value);
+                            }}
+                            type="text"
                             className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
                         />
                     </div>
@@ -41,42 +44,61 @@ const SignupForm = () => {
                         <div className="w-1/2">
                             <label className="text-purple-300 block mb-1">Password</label>
                             <input
-                                onchange = {e=>{
-                                    setPassword(e.target.value)
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
                                 }}
                                 type="password"
                                 placeholder="********"
                                 className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
-                                />
+                            />
                         </div>
                         <div className="w-1/2">
                             <label className="text-purple-300 block mb-1">Confirm Password</label>
                             <input
-                                onchange = {e=>{
-                                    setConfirmPass(e.target.value)
+                                onChange={(e) => {
+                                    setConfirmPass(e.target.value);
                                 }}
                                 type="password"
                                 placeholder="********"
                                 className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
-                                
                             />
                         </div>
                     </div>
-                    <button onClick = {async ()=>{
-                        if(password == confirmPass){
-                            const response = await axios.post("http://localhost:3000/api/v1/user/signup",{
-                                username,
-                                password,
-                                fullname
-                            });
-                        }
-                    }} className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition duration-300">
+                    <button
+                        onClick={async (event) => {
+                            event.preventDefault();
+                            try {
+                                const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
+                                    username,
+                                    password,
+                                    fullName,
+                                });
+                                if (response.status === 201 || response.status === 200) {
+                                    navigate("/dashboard");
+                                } else {
+                                    console.error("Unexpected response:", response);
+                                    alert("Failed to create account. Please try again.");
+                                }
+                            } catch (error) {
+                                console.error("Error during signup:", error);
+                                alert("An error occurred. Please check your input or try again later.");
+                            }
+                        }}
+                        className="w-full bg-purple-500 hover:bg-purple-600 text-white cursor-pointer font-semibold py-3 rounded-lg transition duration-300"
+                    >
                         Create Account
                     </button>
                     <div className="text-center text-purple-300 mt-4">Or</div>
                     <button
                         type="button"
-                        onClick={() => navigate('/signin')}
+                        onClick={() => {
+                            try {
+                                navigate('/signin');
+                            } catch (error) {
+                                console.error("Error during navigation:", error);
+                                alert("An error occurred while navigating. Please try again.");
+                            }
+                        }}
                         className="w-full bg-white text-black font-semibold py-3 rounded-lg mt-2"
                     >
                         Sign in
@@ -86,6 +108,5 @@ const SignupForm = () => {
         </div>
     );
 };
-
 
 export default SignupForm;
