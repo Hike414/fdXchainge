@@ -142,7 +142,7 @@ function Dashboard() {
                 <div className="mb-8">
                     <h1 className="text-3xl pt-6 font-bold text-purple-400">My FFD Tokens</h1>
                 </div>
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {ffdTokens.map((token) => {
                         
                         return (
@@ -154,7 +154,7 @@ function Dashboard() {
                                     <img
                                         src={"/uploads/" + token.image.filename}
                                         alt={token.tokenName}
-                                        className="w-13 h-13 rounded-full border-2 border-purple-500"
+                                        className="w-100 h-50 rounded-md border-2 "
                                     />
                                 </div>
                                 <div className="space-y-2 text-md text-white">
@@ -164,7 +164,7 @@ function Dashboard() {
                             </div>
                         );
                     })}
-                    {fdTokens.length === 0 && (
+                    {ffdTokens.length === 0 && (
                         <div className="col-span-full text-center py-12 bg-[#0D1321] rounded-lg border-2 border-dashed border-gray-300">
                             <Landmark className="mx-auto text-white mb-3" size={32} />
                             <p className="text-white">No FD tokens yet. Create your first FD!</p>
