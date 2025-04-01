@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const { string, number } = require("zod");
-
-
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -121,5 +119,4 @@ const FDToken = new mongoose.model("FDToken",FDtokenSchema)
 module.exports = {
     User,
     FDToken,
-    // listedToken
 };

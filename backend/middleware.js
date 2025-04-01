@@ -9,7 +9,6 @@ const authMiddleware = (req,res,next)=>{
             message:"error while checking balance"
         })
     }
-    
     const token = authHeader.split(' ')[1];
     try{
         const decoded = jwt.verify(token,JWT_SECRET);
@@ -28,7 +27,6 @@ const authMiddleware = (req,res,next)=>{
         });    
     }
 }
-
 module.exports = {
     authMiddleware
 }

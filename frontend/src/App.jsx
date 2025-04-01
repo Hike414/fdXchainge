@@ -10,6 +10,7 @@ import Marketplace from './pages/Marketplace';
 import BuyToken from './pages/BuyToken';
 import bgImage from './assets/BackgroundImage.png';
 import Fractionalise  from './pages/Fractionalise';
+import Footer from './components/Footer';
 function App() {
   return (
     <Router>
@@ -34,6 +35,7 @@ function App() {
           <Route path="/buytoken" element={<BuyToken />} />
           <Route path="/fractionalise" element={<Fractionalise/>} />
         </Routes>
+        <Footer/>
       </div>
     </Router>
   );

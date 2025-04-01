@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import bgImage from '../assets/BackgroundImage.png'
 import { HowItWorks } from '../components/HowItWorks'
 import { Architecture } from '../components/Architecture'
-import Footer from '../components/Footer';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -37,10 +36,10 @@ const Hero = () => {
               Join the next generation of traders breaking free from traditional constraints. With fractionalized FDs, invest in smaller portions to diversify and maximize returns.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-white text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-white/90">
+              <button className="bg-white text-xl  text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-white/90 cursor-pointer">
                 Start Trading Now →
               </button>
-              <button className="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10">
+              <button className="border text-xl border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 cursor-pointer">
                 View Markets →
               </button>
             </div>
@@ -58,17 +57,17 @@ const Hero = () => {
               <h2 className="text-4xl font-bold text-purple-500  mb-4">
                 The right time to invest in FDs is <span className="text-purple-500">now</span>
               </h2>
-              <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-500 to-purple-700 text-lg mb-6">
+              <p className="text-transparent bg-clip-text bg-purple-700 text-lg mb-6">
                  The Fd's Market is getting hotter, and so are the rates! <br />
               </p>
-              <button className="  bg-purple-500 hover:bg-purple-500 text-white px-8 py-3 rounded-full font-medium transition-colors">
+              <button className="  bg-purple-500 hover:bg-purple-500 text-xl text-white px-8 py-3 rounded-full font-medium transition-colors cursor-pointer">
                   Invest Now
               </button>
             </div>
 
             <div className="relative mt-12 pt-8">
               {/* Graph Points */}
-              <div className="absolute right-4 top-0 text-purple-300 text-right">
+              <div className="absolute right-4 top-0 text-purple-500 text-right">
                 <div className="text-2xl font-bold flex items-center gap-2">
                   NOW <span className="inline-block">✨</span>
                 </div>
@@ -113,17 +112,22 @@ const Hero = () => {
                     stroke="url(#lineGradient)"
                     strokeWidth="4"
                   />
-
                   {/* Data Points */}
                   <circle cx="0" cy="100" r="6" fill="url(#lineGradient)" />
                   <circle cx="150" cy="90" r="6" fill="url(#lineGradient)" />
                   <circle cx="250" cy="110" r="6" fill="url(#lineGradient)" />
                   <circle cx="350" cy="30" r="6" fill="url(#lineGradient)" />
                   <circle cx="400" cy="10" r="8" fill="url(#lineGradient)" className="animate-pulse" />
-                </svg>
 
+                  {/* Interest Rate Labels */}
+                  <text x="30" y="70" fill="#6b46c1" fontSize="12" textAnchor="middle">5.00%</text>
+                  <text x="150" y="70" fill="#6b46c1" fontSize="12" textAnchor="middle">6.50%</text>
+                  <text x="250" y="90" fill="#6b46c1" fontSize="12" textAnchor="middle">7.20%</text>
+                  {/* <text x="350" y="10" fill="#6b46c1" fontSize="12" textAnchor="middle">8.00%</text> */}
+                  <text x="400" y="0" fill="#6b46c1" fontSize="12" textAnchor="middle">9.10%</text>
+                </svg>
                 {/* Years */}
-                <div className="absolute bottom-0 left-0 right-0 flex justify-between text-white/80 mt-4">
+                <div className="absolute bottom-0 left-0 right-0 flex justify-between text-purple-700 mt-4">
                   <span>2007</span>
                   <span>2012</span>
                   <span>2016</span>
@@ -131,7 +135,6 @@ const Hero = () => {
                   <span>NOW</span>
                 </div>
               </div>
-
               {/* Graph Glow Effect */}
               <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-300/40 rounded-full blur-xl"></div>
             </div>
@@ -140,7 +143,7 @@ const Hero = () => {
       </div>
       {/* <HowItWorks></HowItWorks> */}
             <Architecture></Architecture>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
