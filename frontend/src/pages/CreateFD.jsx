@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ArrowLeft, Landmark } from 'lucide-react';
 import bgImage from '../assets/BackgroundImage.png';
 import axios from "axios";
+import Fractionalise from './Fractionalise';
 function CreateFD() {
     const navigate = useNavigate();
     const [selectedBank, setSelectedBank] = useState(null);
@@ -47,6 +48,7 @@ function CreateFD() {
 
                 const response = await axios.put("http://localhost:3000/api/v1/fd/update-fd/" + userID, {
                     tokenID: `${selectedPlan.id}-${duration}`,
+                    fractionalised: false,
                     amount: amount.toString(),
                     bank: selectedBank.name,
                     plan: selectedPlan.name,

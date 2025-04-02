@@ -1,15 +1,25 @@
 import React from "react";
-import  {useSearchParams}  from "react-router-dom";
+import  {useNavigate, useSearchParams}  from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 const Fractionalise = () => {
 
     const [tokenName, setTokenName] = React.useState("");
+    const navigate = useNavigate()
     const [searchParams] = useSearchParams();
     const tokenID = searchParams.get("id1");
     const userID = searchParams.get("id2");
+    const amount = searchParams.get("amt");
 
     return (
         <div className="flex justify-center h-screen">
             <div className="h-full flex flex-col justify-center">
+                <button
+                    onClick={() => navigate('/dashboard')}
+                    className="mb-6 flex items-center gap-2 text-2xl text-purple-500 hover:text-purple-600 cursor-pointer"
+                >
+                    <ArrowLeft size={20} />
+                    <span>Back to Dashboard</span>
+                </button>
                 <div className="h-min text-white max-w-md p-4 space-y-8 w-96 bg-[#0D1321] shadow-lg rounded-lg">
                     <div className="flex flex-col space-y-1.5">
                         <h2 className="text-3xl font-bold text-center">Fractionalise FD Token</h2>
@@ -62,10 +72,15 @@ const Fractionalise = () => {
                             <input
                                 type="number"
                                 id="volume"
+                                min = {1}
+                                max = {parseInt(amount)/1000}
                                 name="volume"
                                 className="p-2 mt-2 block w-full rounded-md border-black-300 shadow-sm focus:border-indigo-500 border-2 focus:ring-indigo-500 lg:text-lg"
                                 placeholder="Enter Volume of tokens"
                             />
+                            <p className="text-xs text-white mt-2">
+                                Max Mintable Tokens : {parseInt(amount)/1000}
+                            </p>
                         </div>
                         <div className="hidden">
                             <label
@@ -95,6 +110,21 @@ const Fractionalise = () => {
                                 className="p-2 mt-2 block w-full rounded-md border-black-300 shadow-sm focus:border-indigo-500 border-2 focus:ring-indigo-500 lg:text-lg"
                                 placeholder="Enter Volume of tokens"
                                 value={tokenID}
+                            />
+                        </div>
+                        <div className="hidden">
+                            <label
+                                htmlFor="amount"
+                                className="block text-xl font-medium text-white"
+                            >
+                            </label>
+                            <input
+                                type="string"
+                                id="ampunt"
+                                name="amount"
+                                className="p-2 mt-2 block w-full rounded-md border-black-300 shadow-sm focus:border-indigo-500 border-2 focus:ring-indigo-500 lg:text-lg"
+                                placeholder="Enter Volume of tokens"
+                                value={amount}
                             />
                         </div>
                         <button

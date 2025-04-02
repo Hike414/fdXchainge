@@ -116,9 +116,10 @@ function Dashboard() {
                                     <h3 className="text-lg  text-white font-semibold">{token.tokenID}</h3>
                                     <div>
                                         <button onClick={()=>
-                                            navigate("/fractionalise?id1="+ token._id+"&id2="+userID)
+                                            navigate("/fractionalise?id1="+ token.tokenID+"&id2="+userID+"&amt="+token.amount)
                                         }
-                                         className="ml-20 flex items-center cursor-pointer bg-purple-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors">
+                                        disabled={token.fractionalised}
+                                         className="ml-20 flex items-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed  bg-purple-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors">
                                             Fractionlize
                                         </button>
                                     </div>
@@ -159,6 +160,8 @@ function Dashboard() {
                                 </div>
                                 <div className="space-y-2 text-md text-white">
                                     <h2 className='text-2xl'>Token Name: {token.tokenName}</h2>
+                                    <h2 className='text-2xl'>FD TokenID:{token.FDTokenId}</h2>
+                                    <h2 className='text-2xl'>Price of Each Token :{token.amount}</h2>
                                     <h2 className='text-2xl'>Volume: {token.volume}</h2>
                                 </div>
                             </div>

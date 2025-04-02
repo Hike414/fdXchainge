@@ -37,6 +37,10 @@ const FDtokenSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
+        fractionalised : {
+            type: Boolean,
+            default: false,
+        },
         amount: {
             type: Number,
             required: true
@@ -73,6 +77,14 @@ const FFDTokenSchema = new mongoose.Schema ({
         FDTokenId :{
             type : String,
             required : true
+        },
+        listed :{
+            type : Boolean,
+            default : false,
+        },
+        amount : {
+            type : Number,
+            required : true,
         },
         tokenName : {
             type : String,

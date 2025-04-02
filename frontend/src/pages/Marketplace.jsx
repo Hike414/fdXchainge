@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import bgImage from '../assets/BackgroundImage.png';
+import { ArrowLeft } from 'lucide-react';
 const data = [
     {
       rank: 1,
@@ -77,6 +78,7 @@ const marketplace = () =>{
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
             }}>
+                
              <div className="container mx-auto px-4 py-8">
                
                 {/* <div className="flex justify-between">
@@ -85,6 +87,13 @@ const marketplace = () =>{
                 </div> */}
             </div>
             <div className="container mx-auto ">
+                <button
+                    onClick={() => navigate('/dashboard')}
+                    className="mb-6 flex items-center gap-2 text-2xl text-purple-500 hover:text-purple-600 cursor-pointer"
+                >
+                    <ArrowLeft size={20} />
+                    <span>Back to Dashboard</span>
+                </button>
                 <div className="mb-5">
                     <h1 className="text-3xl font-bold text-purple-400">Trending FFD Tokens</h1>
                 </div>
