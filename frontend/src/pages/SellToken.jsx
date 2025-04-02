@@ -29,8 +29,9 @@ const SellToken = () => {
                 maturityDate: dur,
             });
             const response2 = await axios.put("http://localhost:3000/api/v1/ffd//update-ffd/"+uid+"/"+tid+"/"+tokens);
+            const response3 = await axios.put("http://localhost:3000/api/v1/ffd//update-ffd/"+uid+"/"+tid);
             navigate('/sellsuccess');
-            console.log('Token Listed successfully:', response.data, response2.data);
+            console.log('Token Listed successfully:', response.data, response2.data,response3.data);
         } catch (error) {
             console.error('Error listing token:', error.response ? error.response.data : error.message);
         }

@@ -23,5 +23,24 @@ router.post("/list-token", async (req, res) => {
 });
 
 
+router.get("/bulk", async (req, res) => {
+    try {
+        const tokens = await listedToken.find({});
+        if (!tokens) {
+            return res.status(404).json({ message: "No tokens found" });
+        }
+        res.json({
+            message: "Fetched tokens successfully",
+            data: tokens,
+        });
+    } catch (error) {
+        console.error("Error fetching tokens:", error);
+        res.status(500).json({
+            error: "An error occurred while fetching the tokens",
+        });
+    }
+})
+
+
 
 module.exports = router

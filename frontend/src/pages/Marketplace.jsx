@@ -1,75 +1,24 @@
-import React from 'react';
+import {React,useEffect,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import bgImage from '../assets/BackgroundImage.png';
 import { ArrowLeft } from 'lucide-react';
-const data = [
-    {
-      rank: 1,
-      TokenName: "Jalebi",
-      icon: "🌀",
-      price: "$113.44",
-      RTI: "13.48k",
-      seller: "-3.69%",
-      MachurityDate: "26.32k",
-    },
-    {
-      rank: 1,
-      TokenName: "Gulab Jamun",
-      icon: "🌀",
-      price: "$113.44",
-      RTI: "13.48k",
-      seller: "-3.69%",
-      MachurityDate: "26.32k",
-    },
-    {
-      rank: 1,
-      TokenName: "Rasmalai",
-      icon: "🌀",
-      price: "$113.44",
-      RTI: "13.48k",
-      seller: "-3.69%",
-      MachurityDate: "26.32k",
-    },
-    {
-      rank: 1,
-      TokenName: "Khaja",
-      icon: "🌀",
-      price: "$113.44",
-      RTI: "13.48k",
-      seller: "-3.69%",
-      MachurityDate: "26.32k",
-    },
-    {
-      rank: 1,
-      TokenName: "Kalakand",
-      icon: "🌀",
-      price: "$113.44",
-      RTI: "13.48k",
-      seller: "-3.69%",
-      MachurityDate: "26.32k",
-    },
-    {
-      rank: 1,
-      TokenName: "Apricot Delight",
-      icon: "🌀",
-      price: "$113.44",
-      RTI: "13.48k",
-      seller: "-3.69%",
-      MachurityDate: "26.32k",
-    },
-    {
-      rank: 1,
-      TokenName: "Halwa",
-      icon: "🌀",
-      price: "$113.44",
-      RTI: "13.48k",
-      seller: "-3.69%",
-      MachurityDate: "26.32k",
-    },
-  ];
-  
+import axios from 'axios';
+
 const marketplace = () =>{
     const navigate = useNavigate();
+    const [data,setData] = useState([]);
+    useEffect(() => {
+            const fetchData = async () => {
+                const response = await axios.get("http://localhost:3000/api/v1/marketplace/bulk");
+                if (response.status === 200) {
+                    console.log("Data fetched successfully");
+                    setData(response.data.data);
+                } else {
+                    console.error("Error fetching data");
+                }
+            };
+            fetchData();
+        },[]);
     return (
         <div className="min-h-screen"
             style={{
@@ -115,7 +64,6 @@ const marketplace = () =>{
             <table className="w-full border-collapse">
                 <thead>
                 <tr className="text-left text-gray-400 text-xl border-b border-gray-700">
-                    <th className="p-2">#</th>
                     <th className="p-2">TokenName</th>
                     <th className="p-2">Avg. Price</th>
                     <th className="p-2">RTI</th>
@@ -126,16 +74,15 @@ const marketplace = () =>{
                 </thead>
                 <tbody>
                 {data.map((item) => (
-                    <tr key={item.rank} className="border-b border-gray-700 text-xl">
-                    <td className="p-2">{item.rank}</td>
-                    <td className="p-2 flex items-center gap-2">
-                        <span>{item.icon}</span>
-                        {item.TokenName}
+                    <tr className="border-b border-gray-700 text-xl">
+                    <td className="p-2">
+                        {/* <span>{item.icon}</span> */}
+                        {item.tokenName}
                     </td>
                     <td className="p-2">{item.price}</td>
                     <td className="p-2">{item.RTI}</td>
                     <td className="p-2">{item.seller}</td>
-                    <td className="p-2">{item.MachurityDate}</td>
+                    <td className="p-2">{item.maturityDate.slice(0,10)}</td>
                     <button onClick={()=>{
                         navigate("/buytoken?id=" + item.TokenName);
                     }}

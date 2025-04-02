@@ -3,6 +3,8 @@ const express = require("express");
 const { string, number, boolean } = require("zod");
 
 
+mongoose.connect("mongodb+srv://Rahul:Rahul6255@cluster0.uera1.mongodb.net/fdxchainge")
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,

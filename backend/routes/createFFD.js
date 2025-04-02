@@ -28,7 +28,6 @@ router.put("/update-ffd/:uid/:fid/:tokens", async (req, res) => {
         const fid = req.params.fid;
         const tokens = req.params.tokens;
 
-        // Retrieve the current volume
         const ffdToken = await FFDToken.findOne({ user: uid, "FFDTokens._id": fid });
         if (!ffdToken) {
             return res.status(404).json({ message: "No matching document found." });
@@ -42,6 +41,30 @@ router.put("/update-ffd/:uid/:fid/:tokens", async (req, res) => {
         const updatedDocument = await FFDToken.findOneAndUpdate(
             { user: uid, "FFDTokens._id": fid },
             { $set: { "FFDTokens.$.volume": parseInt(currentVolume) - parseInt(tokens) } },
+            { new: true }
+        );
+
+        if (!updatedDocument) {
+        console.log("No matching document found.");
+        return res.status(404).json({ message: "No matching document found." });
+        }
+
+        return res.json({ message: "FFD Token updated successfully", updatedDocument });
+    } catch (error) {
+        console.error("Error updating fractionalised field:", error);
+        return res.status(500).json({ error: "Error updating fractionalised field"
+        });
+    }
+})
+router.put("/update-ffd/:uid/:fid", async (req, res) => {
+    try {
+        const uid = req.params.uid;
+        const fid = req.params.fid;
+
+
+        const updatedDocument = await FFDToken.findOneAndUpdate(
+            { user: uid, "FFDTokens._id": fid },
+            { $set: { "FFDTokens.$.listed": true} },
             { new: true }
         );
 
