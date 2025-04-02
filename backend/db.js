@@ -64,6 +64,10 @@ const FDtokenSchema = new mongoose.Schema({
         createdAt: {
             type: Date,
             default: Date.now
+        },
+        maturityDate : {
+            type:Date,
+            required : true
         }
     }]
 });
@@ -103,6 +107,18 @@ const FFDTokenSchema = new mongoose.Schema ({
                 type : String,
                 required : true,
             }
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        },
+        maturityDate : {
+            type:Date,
+            required : true
+        },
+        interestRate: {
+            type: Number,
+            required: true
         }
     }]
 })

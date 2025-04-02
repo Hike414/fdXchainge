@@ -28,8 +28,8 @@ router.post("/upload", upload.single("image"), async (req, res) => {
         }
 
         const { path, filename } = req.file;
-
         const body = req.body;
+        const date = new Date(body.dur);
         if (!body) {
             return res.status(400).json({ error: "Request body is required" });
         }
@@ -40,13 +40,15 @@ router.post("/upload", upload.single("image"), async (req, res) => {
         ffdtoken.FFDTokens.push({
             FDTokenId: body.FDID,
             listed: false,
-            amount: body.amount/body.volume,
+            amount: body.amount / body.volume,
             tokenName: body.tokenName,
             volume: body.volume,
             image: {
-                filename : filename,
-                path : path,
-            }
+            filename: filename,
+            path: path,
+            },
+            maturityDate: date,
+            interestRate: body.int,
         });
         await ffdtoken.save(); 
 

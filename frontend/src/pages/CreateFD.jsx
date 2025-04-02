@@ -45,7 +45,8 @@ function CreateFD() {
         if (!selectedBank || !selectedPlan || !amount || !duration) return;
 
             try {
-
+                const now = new Date(Date.now());
+                now.setMonth(now.getMonth() + parseInt(duration)); 
                 const response = await axios.put("http://localhost:3000/api/v1/fd/update-fd/" + userID, {
                     tokenID: `${selectedPlan.id}-${duration}`,
                     fractionalised: false,
@@ -54,6 +55,7 @@ function CreateFD() {
                     plan: selectedPlan.name,
                     interestRate: selectedPlan.interestRate.toString(),
                     duration: duration.toString(),
+                    maturityDate : now
                 });
                 console.log('FD created successfully:', response.data);
                 navigate('/dashboard');

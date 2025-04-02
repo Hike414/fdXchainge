@@ -116,7 +116,7 @@ function Dashboard() {
                                     <h3 className="text-lg  text-white font-semibold">{token.tokenID}</h3>
                                     <div>
                                         <button onClick={()=>
-                                            navigate("/fractionalise?id1="+ token.tokenID+"&id2="+userID+"&amt="+token.amount)
+                                            navigate("/fractionalise?tid="+ token.tokenID+"&uid="+userID+"&amt="+token.amount+"&dur="+token.maturityDate+"&int="+token.interestRate)
                                         }
                                         disabled={token.fractionalised}
                                          className="ml-20 flex items-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed  bg-purple-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors">
@@ -170,7 +170,7 @@ function Dashboard() {
                     {ffdTokens.length === 0 && (
                         <div className="col-span-full text-center py-12 bg-[#0D1321] rounded-lg border-2 border-dashed border-gray-300">
                             <Landmark className="mx-auto text-white mb-3" size={32} />
-                            <p className="text-white">No FD tokens yet. Create your first FD!</p>
+                            <p className="text-white">No FFD tokens yet!</p>
                         </div>
                     )}
                 </div>

@@ -6,9 +6,11 @@ const Fractionalise = () => {
     const [tokenName, setTokenName] = React.useState("");
     const navigate = useNavigate()
     const [searchParams] = useSearchParams();
-    const tokenID = searchParams.get("id1");
-    const userID = searchParams.get("id2");
+    const tokenID = searchParams.get("tid");
+    const userID = searchParams.get("uid");
     const amount = searchParams.get("amt");
+    const dur = searchParams.get("dur");
+    const int = searchParams.get("int");
 
     return (
         <div className="flex justify-center h-screen">
@@ -85,46 +87,61 @@ const Fractionalise = () => {
                         <div className="hidden">
                             <label
                                 htmlFor="userId"
-                                className="block text-xl font-medium text-white"
                             >
                             </label>
                             <input
                                 type="string"
                                 id="UserId"
                                 name="UserId"
-                                className="p-2 mt-2 block w-full rounded-md border-black-300 shadow-sm focus:border-indigo-500 border-2 focus:ring-indigo-500 lg:text-lg"
-                                placeholder="Enter Volume of tokens"
                                 value = {userID}
                             />
                         </div>
                         <div className="hidden">
                             <label
                                 htmlFor="FDID"
-                                className="block text-xl font-medium text-white"
                             >
                             </label>
                             <input
                                 type="string"
                                 id="FDID"
                                 name="FDID"
-                                className="p-2 mt-2 block w-full rounded-md border-black-300 shadow-sm focus:border-indigo-500 border-2 focus:ring-indigo-500 lg:text-lg"
-                                placeholder="Enter Volume of tokens"
                                 value={tokenID}
                             />
                         </div>
                         <div className="hidden">
                             <label
                                 htmlFor="amount"
-                                className="block text-xl font-medium text-white"
                             >
                             </label>
                             <input
                                 type="string"
                                 id="ampunt"
                                 name="amount"
-                                className="p-2 mt-2 block w-full rounded-md border-black-300 shadow-sm focus:border-indigo-500 border-2 focus:ring-indigo-500 lg:text-lg"
-                                placeholder="Enter Volume of tokens"
                                 value={amount}
+                            />
+                        </div>
+                        <div className="hidden">
+                            <label
+                                htmlFor="dur"
+                            >
+                            </label>
+                            <input
+                                type="string"
+                                id="dur"
+                                name="dur"
+                                value={dur}
+                            />
+                        </div>
+                        <div className="hidden">
+                            <label
+                                htmlFor="int"
+                            >
+                            </label>
+                            <input
+                                type="string"
+                                id="int"
+                                name="int"
+                                value={int}
                             />
                         </div>
                         <button
