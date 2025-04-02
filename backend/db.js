@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const { string, number } = require("zod");
+const { string, number, boolean } = require("zod");
 
 
 const userSchema = new mongoose.Schema({
@@ -122,40 +122,45 @@ const FFDTokenSchema = new mongoose.Schema ({
         }
     }]
 })
-// const listedTokenSchema = new mongoose.Schema({
-//     tokenID : {
-//         type: String,
-//         required: true,
-//         unique : true
-//     },
-//     tokenName : {
-//         type : String,
-//         required : true,
-//     },
-//     price : {
-//         type : Number,
-//         required : true,
-//     },
-//     RTI : {
-//         type : Number,
-//         required : true,
-//     },
-//     seller : {
-//         type : String,
-//         required : true,
-//     },
-//     maturityDate : {
-//         type : Date,
-//         required : true,
-//     }
-// })
+const listedTokenSchema = new mongoose.Schema({
+    tokenID : {
+        type: String,
+        required: true,
+        unique : true
+    },
+    sold : {
+        type : Boolean,
+        default : false,
+    },
+    tokenName : {
+        type : String,
+        required : true,
+    },
+    price : {
+        type : Number,
+        required : true,
+    },
+    RTI : {
+        type : Number,
+        required : true,
+    },
+    seller : {
+        type : String,
+        required : true,
+    },
+    maturityDate : {
+        type : Date,
+        required : true,
+    }
+})
 const User = new mongoose.model("User",userSchema)
 const FDToken = new mongoose.model("FDToken",FDtokenSchema)
 const FFDToken = new mongoose.model("FFDToken",FFDTokenSchema)
-// const listedToken = new mongoose.model("listedToken",listedTokenSchema)
+const listedToken = new mongoose.model("listedToken",listedTokenSchema)
 
 module.exports = {
     User,
     FDToken,
     FFDToken,
+    listedToken
 };

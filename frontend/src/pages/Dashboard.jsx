@@ -158,11 +158,19 @@ function Dashboard() {
                                         className="w-100 h-50 rounded-md border-2 "
                                     />
                                 </div>
-                                <div className="space-y-2 text-md text-white">
+                                <div className="space-y-2  text-md text-white">
                                     <h2 className='text-2xl'>Token Name: {token.tokenName}</h2>
                                     <h2 className='text-2xl'>FD TokenID:{token.FDTokenId}</h2>
                                     <h2 className='text-2xl'>Price of Each Token :{token.amount}</h2>
                                     <h2 className='text-2xl'>Volume: {token.volume}</h2>
+                                </div>
+                                <div>
+                                    <button
+                                    onClick={()=>navigate("/selltoken?tid="+token._id+"&uid="+userID+"&amt="+token.amount+"&dur="+token.maturityDate+"&int="+token.interestRate+"&vol="+token.volume+"&name="+token.tokenName)}
+                                    disabled={token.listed}
+                                     className=' mt-10 ml-20 flex items-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed  bg-purple-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors'>
+                                        Sell This Token
+                                    </button>
                                 </div>
                             </div>
                         );

@@ -3,13 +3,13 @@ const userRouter = require('./user')
 const createFDRouter = require('./createFD')
 const createFFDRouter = require('./createFFD')
 const FileuploadRouter = require('./Fileupload')
-// const listTokens = require('./listToken')
+const marketplace = require('./marketplace')
 const router = express.Router();
 
 router.use("/user",userRouter)
 router.use("/fd",createFDRouter)
 router.use("/ffd",createFFDRouter)
 router.use("/image",FileuploadRouter)
-// router.use("/marketplace",listTokens)
+router.use("/marketplace",marketplace)
 
 module.exports = router

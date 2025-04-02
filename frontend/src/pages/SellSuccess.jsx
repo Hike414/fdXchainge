@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const TokenSuccess = () => {
+const SellSuccess = () => {
     const navigate = useNavigate();
     return (
         <div className="flex flex-col justify-center items-center h-screen ">
@@ -18,7 +18,7 @@ const TokenSuccess = () => {
                 </div>
                 <h1 className="text-2xl font-bold text-white mb-2">Success!</h1>
                 <p className="text-white mb-5">
-                    Your token has been created successfully.
+                    Your token has Listed successfully.
                 </p>
                 <button
                     onClick={()=>{navigate('/dashboard')}}
@@ -31,4 +31,4 @@ const TokenSuccess = () => {
     );
 };
 
-export default TokenSuccess;
+export default SellSuccess;

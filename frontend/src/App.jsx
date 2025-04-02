@@ -12,6 +12,8 @@ import bgImage from './assets/BackgroundImage.png';
 import Fractionalise  from './pages/Fractionalise';
 import Footer from './components/Footer';
 import TokenSuccess from './pages/TokenSuccess';
+import SellToken from './pages/SellToken';
+import SellSuccess from './pages/SellSuccess';
 function App() {
   return (
     <Router>
@@ -36,6 +38,8 @@ function App() {
           <Route path="/buytoken" element={<BuyToken />} />
           <Route path="/fractionalise" element={<Fractionalise/>} />
           <Route path="/tokensuccess" element={<TokenSuccess/>} />
+          <Route path="/selltoken" element={<SellToken/>} />
+          <Route path="/sellsuccess" element={<SellSuccess/>} />
         </Routes>
         <Footer/>
       </div>
