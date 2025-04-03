@@ -75,20 +75,27 @@ const marketplace = () =>{
                 <tbody>
                 {data.map((item) => (
                     <tr className="border-b border-gray-700 text-xl">
-                    <td className="p-2">
+                    <td className="p-2 flex items-center gap-3">
                         {/* <span>{item.icon}</span> */}
+                        <img
+                            src={"/uploads/" + item.fileName}
+                            alt={item.tokenName}
+                            className="w-12 h-12 rounded-md border-2 "
+                        />
                         {item.tokenName}
                     </td>
                     <td className="p-2">{item.price}</td>
                     <td className="p-2">{item.RTI}</td>
                     <td className="p-2">{item.seller}</td>
                     <td className="p-2">{item.maturityDate.slice(0,10)}</td>
+                    <td className = "p-2">
                     <button onClick={()=>{
-                        navigate("/buytoken?id=" + item.tokenName + "&int=" + item.RTI + "&seller=" + item.seller + "&maturityDate=" + item.maturityDate.slice(0,10) + "&price=" + item.price);
+                        navigate("/buytoken?id=" + item.tokenName + "&int=" + item.RTI + "&seller=" + item.seller + "&maturityDate=" + item.maturityDate.slice(0,10) + "&price=" + item.price + "&fileName=" + item.fileName);
                     }}
                      className='text-sm pl-5 pt-2 pb-2 pr-5 mb-2 text-white bg-green-500 rounded-lg hover:bg-green-600 font-bold cursor-pointer' >
                         BUY
                     </button>
+                    </td>
                     </tr>
                 ))}
                 </tbody>
