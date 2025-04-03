@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import bgImage from '../assets/BackgroundImage.png'
 import { HowItWorks } from '../components/HowItWorks'
 import { Architecture } from '../components/Architecture'
+import References from './References';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -142,6 +143,7 @@ const Hero = () => {
         </div>
       </div>
       {/* <HowItWorks></HowItWorks> */}
+             <References/>
             <Architecture></Architecture>
       {/* <Footer /> */}
     </div>
