@@ -1,92 +1,134 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PlusCircle, Landmark ,ShoppingBagIcon} from 'lucide-react';
+import { PlusCircle, Landmark, ShoppingBagIcon } from 'lucide-react';
 import bgImage from '../assets/BackgroundImage.png';
 import axios from 'axios';
+
 function Dashboard() {
     const navigate = useNavigate();
     const [fullName, setFullName] = useState('');
     const [userID, setUserID] = useState('');
-    
+    const [fdTokens, setFdTokens] = useState([]);
+    const [ffdTokens, setFFdTokens] = useState([]);
+    const [recentTransactions, setRecentTransactions] = useState([]);
+
     useEffect(() => {
         const fetchFullName = async () => {
             const saved = localStorage.getItem('username');
             if (saved) {
                 try {
                     const response = await axios.get('http://localhost:3000/api/v1/user/getUser', {
-                        params: {
-                            username: saved,
-                        },
+                        params: { username: saved },
                     });
-                    console.log(response.data);
                     if (response.status === 200) {
                         setFullName(response.data.fullName);
                         setUserID(response.data.userId);
-                    } else {
-                        console.error('Unexpected response:', response);
-                        alert('An error occurred. Please try again.');
                     }
                 } catch (error) {
                     console.error('Error fetching user data:', error);
-                    alert('An error occurred. Please try again.');
                 }
             }
         };
         fetchFullName();
     }, []);
-    
-    const [fdTokens, setFdTokens] = useState([]);
-    const [ffdTokens, setFFdTokens] = useState([]);
+
     useEffect(() => {
-        const fetchFdTokens = async () => {
+        const fetchTokens = async () => {
             if (userID) {
                 try {
-                    const response = await axios.get(`http://localhost:3000/api/v1/fd/bulk/${userID}`);
-                    const response2 = await axios.get(`http://localhost:3000/api/v1/ffd/bulk/${userID}`);
-                    if (response.status === 200) {
-                        console.log(response.data.FDTokens)
-                        setFdTokens(response.data.FDTokens);
-                    } else {
-                        console.error('Unexpected response:', response);
-                        alert('An error occurred while fetching FD tokens. Please try again.');
-                    }
-                    if (response2.status === 200) {
-                        console.log(response2.data.FFDTokens)
-                        setFFdTokens(response2.data.FFDTokens);
-                    } else {
-                        console.error('Unexpected response:', response2);
-                        alert('An error occurred while fetching FFD tokens. Please try again.');
-                    }
+                    const fdResponse = await axios.get(`http://localhost:3000/api/v1/fd/bulk/${userID}`);
+                    const ffdResponse = await axios.get(`http://localhost:3000/api/v1/ffd/bulk/${userID}`);
+                    if (fdResponse.status === 200) setFdTokens(fdResponse.data.FDTokens);
+                    if (ffdResponse.status === 200) setFFdTokens(ffdResponse.data.FFDTokens);
                 } catch (error) {
-                    console.error('Error fetching FD tokens:', error);
-                    alert('An error occurred while fetching FD tokens. Please try again.');
+                    console.error('Error fetching tokens:', error);
                 }
             }
         };
-        fetchFdTokens();
-    },[userID]);
-    
-    
+        fetchTokens();
+    }, [userID]);
+
+    useEffect(() => {
+        // Fetch recent transactions (mocked for now)
+        setRecentTransactions([
+            { id: 1, type: 'Buy', token: 'Token A', amount: 5000, date: '2023-10-01' },
+            { id: 2, type: 'Sell', token: 'Token B', amount: 3000, date: '2023-09-28' },
+        ]);
+    }, []);
+
+    // Calculations
+    const totalFDValue = fdTokens.reduce((sum, token) => sum + token.amount, 0);
+    const totalInterestPayout = fdTokens.reduce((sum, token) => {
+        const interest = (token.amount * token.interestRate * token.duration) / (100 * 12);
+        return sum + interest;
+    }, 0);
+    const upcomingInterestPayout = fdTokens.reduce((sum, token) => {
+        const maturityDate = new Date(token.maturityDate);
+        const today = new Date();
+        if (maturityDate > today) {
+            const interest = (token.amount * token.interestRate * token.duration) / (100 * 12);
+            return sum + interest;
+        }
+        return sum;
+    }, 0);
+    const activeFDs = fdTokens.length;
+    const fdPartners = [...new Set(fdTokens.map(token => token.bank))].length;
+    const ffdTokenCount = ffdTokens.length;
 
     return (
-        <div
-            className="min-h-screen bg-gradient-to-br from-purple-950 to-black"
-            // style={{
-            //     backgroundImage: `url(${bgImage})`,
-            //     backgroundSize: 'cover',
-            //     backgroundRepeat: 'no-repeat',
-            //     backgroundPosition: 'center',
-            // }}
-        >
+        <div className="min-h-screen bg-gradient-to-br from-purple-950 to-black">
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-white">Welcome {fullName}</h1>
                     <p className="mt-2 text-purple-400">Manage your fixed deposits and create new ones</p>
                 </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                        <h2 className="text-xl font-bold">Total FD Value</h2>
+                        <p className="text-2xl">₹{totalFDValue.toFixed(2)}</p>
+                    </div>
+                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                        <h2 className="text-xl font-bold">Total Interest Payout</h2>
+                        <p className="text-2xl">₹{totalInterestPayout.toFixed(2)}</p>
+                    </div>
+                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                        <h2 className="text-xl font-bold">Upcoming Interest Payout</h2>
+                        <p className="text-2xl">₹{upcomingInterestPayout.toFixed(2)}</p>
+                    </div>
+                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                        <h2 className="text-xl font-bold">Active FDs</h2>
+                        <p className="text-2xl">{activeFDs}</p>
+                    </div>
+                </div>
+                <div className="mb-8">
+                    <h1 className="text-3xl font-bold text-purple-400">Recent Transactions</h1>
+                </div>
+                <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                    <table className="w-full">
+                        <thead>
+                            <tr className="text-left text-gray-400">
+                                <th className="p-2">Type</th>
+                                <th className="p-2">Token</th>
+                                <th className="p-2">Amount</th>
+                                <th className="p-2">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {recentTransactions.map(tx => (
+                                <tr key={tx.id} className="border-b border-gray-700">
+                                    <td className="p-2">{tx.type}</td>
+                                    <td className="p-2">{tx.token}</td>
+                                    <td className="p-2">₹{tx.amount}</td>
+                                    <td className="p-2">{tx.date}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
                 <div className='flex justify-between gap-4'>
                     <button
                         onClick={() => navigate('/create-fd')}
-                        className="mb-8 flex items-center gap-2 cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors"
+                        className="mb-8 flex mt-5  items-center gap-2 cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors"
                         >
                         <PlusCircle size={20} />
                         Create New FD
