@@ -11,7 +11,7 @@ import {
   UserCircle,
   Clock,
   PieChart,
-  DollarSign
+  DollarSign,
 } from 'lucide-react';
 
 export function Architecture() {
@@ -37,8 +37,8 @@ export function Architecture() {
             </h3>
             <div className="flex items-center justify-center gap-12 animate-fade-in"> {/* Increased gap */}
               <div className="flex flex-col items-center">
-                <Wallet className="w-14 h-14 text-purple-300 mb-4" /> {/* Increased icon size */}
-                <p className="text-purple-200 text-lg">Connect Wallet</p> {/* Increased font size */}
+                <UserCircle className="w-14 h-14 text-purple-300 mb-4" /> {/* Increased icon size */}
+                <p className="text-purple-200 text-lg">SignIn</p> {/* Increased font size */}
               </div>
               <div className="w-32 h-px border-t-2 border-dotted border-purple-300 relative"> {/* Adjusted size */}
                 <ArrowRight className="w-6 h-6 text-purple-300 absolute -right-3 -top-3" /> {/* Increased icon size */}

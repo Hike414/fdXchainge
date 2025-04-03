@@ -153,8 +153,8 @@ const Hero = () => {
         </div>
       </div>
       {/* <HowItWorks></HowItWorks> */}
-             <References/>
             <Architecture></Architecture>
+             <References/>
       {/* <Footer /> */}
     </div>
   );

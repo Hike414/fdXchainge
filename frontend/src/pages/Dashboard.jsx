@@ -60,14 +60,14 @@ function Dashboard() {
     const totalFDValue = fdTokens.reduce((sum, token) => sum + token.amount, 0);
     const totalInterestPayout = fdTokens.reduce((sum, token) => {
         const interest = (token.amount * token.interestRate * token.duration) / (100 * 12);
-        return sum + interest;
+        return interest;
     }, 0);
     const upcomingInterestPayout = fdTokens.reduce((sum, token) => {
         const maturityDate = new Date(token.maturityDate);
         const today = new Date();
         if (maturityDate > today) {
             const interest = (token.amount * token.interestRate * token.duration) / (100 * 12);
-            return sum + interest;
+            return interest;
         }
         return sum;
     }, 0);
@@ -82,7 +82,7 @@ function Dashboard() {
                     <h1 className="text-3xl font-bold text-white">Welcome {fullName}</h1>
                     <p className="mt-2 text-purple-400">Manage your fixed deposits and create new ones</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
                         <h2 className="text-xl font-bold">Total FD Value</h2>
                         <p className="text-2xl">₹{totalFDValue.toFixed(2)}</p>
@@ -99,32 +99,8 @@ function Dashboard() {
                         <h2 className="text-xl font-bold">Active FDs</h2>
                         <p className="text-2xl">{activeFDs}</p>
                     </div>
-                </div>
-                <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-purple-400">Recent Transactions</h1>
-                </div>
-                <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
-                    <table className="w-full">
-                        <thead>
-                            <tr className="text-left text-gray-400">
-                                <th className="p-2">Type</th>
-                                <th className="p-2">Token</th>
-                                <th className="p-2">Amount</th>
-                                <th className="p-2">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {recentTransactions.map(tx => (
-                                <tr key={tx.id} className="border-b border-gray-700">
-                                    <td className="p-2">{tx.type}</td>
-                                    <td className="p-2">{tx.token}</td>
-                                    <td className="p-2">₹{tx.amount}</td>
-                                    <td className="p-2">{tx.date}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                </div> */}
+                
                 <div className='flex justify-between gap-4'>
                     <button
                         onClick={() => navigate('/create-fd')}
@@ -135,7 +111,7 @@ function Dashboard() {
                     </button>
                     <button
                         onClick={() => navigate('/marketplace')}
-                        className="mb-8 flex items-center gap-2 cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors"
+                        className="mb-8 flex mt-5 items-center gap-2 cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors"
                         >
                         <ShoppingBagIcon size={20} />
                         View Marketplace
@@ -161,7 +137,7 @@ function Dashboard() {
                                             navigate("/fractionalise?tid="+ token.tokenID+"&uid="+userID+"&amt="+token.amount+"&dur="+token.maturityDate+"&int="+token.interestRate)
                                         }
                                         disabled={token.fractionalised}
-                                         className="ml-20 flex items-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed  bg-purple-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors">
+                                         className="ml-20 flex items-center cursor-pointer disabled:bg-red-400 disabled:cursor-not-allowed disabled:text-black bg-green-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
                                             Fractionlize
                                         </button>
                                     </div>
@@ -171,6 +147,7 @@ function Dashboard() {
                                     <p>Bank: {token.bank}</p>
                                     <p>Plan: {token.plan}</p>
                                     <p>Duration: {token.duration} months</p>
+                                    <p> Interest Rate: {token.interestRate} </p>
                                     <p>Maturity Date : {token.maturityDate.slice(0,10)}</p>
                                 </div>
                             </div>
@@ -234,6 +211,31 @@ function Dashboard() {
                         </div>
                     )}
                 </div>
+                {/* <div className="mb-8">
+                    <h1 className="text-3xl pt-5 font-bold text-purple-400">Recent Transactions</h1>
+                </div>
+                <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                    <table className="w-full">
+                        <thead>
+                            <tr className="text-left text-gray-400">
+                                <th className="p-2 text-2xl">Type</th>
+                                <th className="p-2 text-2xl">Token</th>
+                                <th className="p-2 text-2xl">Amount</th>
+                                <th className="p-2 text-2xl">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {recentTransactions.map(tx => (
+                                <tr key={tx.id} className="border-b text-xl border-gray-700">
+                                    <td className={`p-2 ${tx.type.toLowerCase() === 'buy' ? 'text-green-500' : 'text-red-500'}`}>{tx.type}</td>
+                                    <td className="p-2">{tx.token}</td>
+                                    <td className="p-2">₹{tx.amount}</td>
+                                    <td className="p-2">{tx.date}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div> */}
             </div>
         </div>
     );

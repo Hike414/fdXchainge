@@ -48,7 +48,7 @@ const References = () => {
   return (
     <div className="bg-gradient-to-br from-purple-950 to-black text-white py-16">
       <div className="container mx-auto px-6">
-        <h2 className="text-5xl font-bold text-center mb-12">Evolution of Tokenized Deposits</h2>
+        <h2 className="text-5xl font-bold text-center mb-12">Reference for Our Idea to Build this Project</h2>
         <div className="overflow-hidden">
           <div className="flex transition-transform duration-500 ease-in-out">
             {getVisibleReferences().map((reference, index) => (
