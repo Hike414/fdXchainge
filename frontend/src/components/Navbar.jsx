@@ -28,14 +28,14 @@ const Navbar = () => {
           {isSignedIn ? (
             <button
               onClick={handleSignOut}
-              className="text-purple rounded-2xl px-5 py-1 text-xl cursor-pointer bg-white hover:bg-white transform hover:scale-110 transition-transform duration-200"
+              className="text-purple rounded-2xl px-5 py-1 text-xl cursor-pointer bg-purple-500 hover:bg-purple-600 transform hover:scale-110 transition-transform duration-200"
             >
               Sign Out
             </button>
           ) : (
             <button
               onClick={() => navigate('/signin')}
-              className="text-purple rounded-2xl px-5 py-1 text-xl cursor-pointer bg-white hover:bg-white transform hover:scale-110 transition-transform duration-200"
+              className="text-purple rounded-2xl px-5 py-1 text-xl cursor-pointer bg-purple-500 hover:bg-purple-600 transform hover:scale-110 transition-transform duration-200"
             >
               Sign In
             </button>

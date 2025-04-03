@@ -106,14 +106,13 @@ function Dashboard() {
     const ffdTokenCount = ffdTokens.length;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-950 to-black">
+        <div className="min-h-screen bg-purple-950">
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-8 flex justify-between">
                     <h1 className="text-3xl font-bold text-white">Welcome {fullName}</h1>
                     <h1 className="text-3xl font-bold text-white">Your Balance : {balance}</h1>
                 </div>
-                    <p className="mt-2 text-purple-400">Manage your fixed deposits and create new ones</p>
-                {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
                         <h2 className="text-xl font-bold">Total FD Value</h2>
                         <p className="text-2xl">₹{totalFDValue.toFixed(2)}</p>
@@ -130,7 +129,7 @@ function Dashboard() {
                         <h2 className="text-xl font-bold">Active FDs</h2>
                         <p className="text-2xl">{activeFDs}</p>
                     </div>
-                </div> */}
+                </div>
                 
                 <div className='flex justify-between gap-4'>
                     <button
@@ -278,7 +277,7 @@ function Dashboard() {
                     )}
                 </div>
 
-                {/* <div className="mb-8">
+                <div className="mb-8">
                     <h1 className="text-3xl pt-5 font-bold text-purple-400">Recent Transactions</h1>
                 </div>
                 <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
@@ -302,7 +301,7 @@ function Dashboard() {
                             ))}
                         </tbody>
                     </table>
-                </div> */}
+                </div>
             </div>
         </div>
     );
