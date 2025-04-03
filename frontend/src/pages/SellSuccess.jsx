@@ -18,7 +18,7 @@ const SellSuccess = () => {
                 </div>
                 <h1 className="text-2xl font-bold text-white mb-2">Success!</h1>
                 <p className="text-white mb-5">
-                    Your token has Listed successfully.
+                    Your token has Been Listed successfully.
                 </p>
                 <button
                     onClick={()=>{navigate('/dashboard')}}

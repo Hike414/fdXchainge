@@ -167,12 +167,20 @@ function Dashboard() {
                                     <h2 className='text-lg'>Maturity Date : {token.maturityDate.slice(0,10)}</h2>
                                 </div>
                                 <div>
-                                    <button
-                                    onClick={()=>navigate("/selltoken?tid="+token._id+"&uid="+userID+"&amt="+token.amount+"&dur="+token.maturityDate+"&int="+token.interestRate+"&vol="+token.volume+"&name="+token.tokenName)}
-                                    disabled={token.listed}
-                                     className=' mt-10 ml-20 flex items-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed  bg-purple-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors'>
-                                        Sell This Token
-                                    </button>
+                                    {!token.listed ? (
+                                        <button
+                                        onClick={()=>navigate("/selltoken?tid="+token._id+"&uid="+userID+"&amt="+token.amount+"&dur="+token.maturityDate+"&int="+token.interestRate+"&vol="+token.volume+"&name="+token.tokenName+"&fileName="+token.image.filename+"&")}
+                                        disabled={token.listed}
+                                        className=' mt-10 ml-20 flex items-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed  bg-green-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-green-600 transition-colors'>
+                                            Sell This Token
+                                        </button>
+                                    ):(
+                                        <button
+                                        disabled={false}
+                                        className=' mt-10 ml-20 flex items-center   cursor-not-allowed  bg-red-400  text-black text-lg px-6 py-3 rounded-lg hover:bg-red-400 transition-colors'>
+                                            Listed
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         );
