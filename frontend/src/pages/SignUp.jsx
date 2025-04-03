@@ -79,6 +79,7 @@ const SignupForm = () => {
                                 });
                                 if (response.status === 201 || response.status === 200) {
                                     localStorage.setItem("username", username);
+                                    localStorage.setItem("signedIn", true);
                                     navigate("/dashboard");
                                 } else {
                                     console.error("Unexpected response:", response);

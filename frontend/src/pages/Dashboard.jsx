@@ -80,7 +80,7 @@ function Dashboard() {
         >
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-white">Welcome back {fullName}</h1>
+                    <h1 className="text-3xl font-bold text-white">Welcome {fullName}</h1>
                     <p className="mt-2 text-purple-400">Manage your fixed deposits and create new ones</p>
                 </div>
                 <div className='flex justify-between gap-4'>
