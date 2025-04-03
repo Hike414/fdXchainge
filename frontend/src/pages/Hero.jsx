@@ -3,9 +3,11 @@ import bgImage from '../assets/BackgroundImage.png'
 import { HowItWorks } from '../components/HowItWorks'
 import { Architecture } from '../components/Architecture'
 import References from './References';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -18,6 +20,15 @@ const Hero = () => {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  const handleGetStarted = () => {
+    const isSignedIn = localStorage.getItem('username');
+    if (isSignedIn) {
+      navigate('/dashboard'); // Redirect to dashboard if signed in
+    } else {
+      navigate('/signin'); // Redirect to signin if not signed in
+    }
+  };
 
   return (
     <div
@@ -36,11 +47,11 @@ const Hero = () => {
               Join the next generation of traders breaking free from traditional constraints. With fractionalized FDs, invest in smaller portions to diversify and maximize returns.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-white text-xl  text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-white/90 cursor-pointer">
-                Start Trading Now →
-              </button>
-              <button className="border text-xl border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 cursor-pointer">
-                View Markets →
+              <button
+                onClick={handleGetStarted}
+                className="bg-white text-xl text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-white/90 cursor-pointer"
+              >
+                Get Started
               </button>
             </div>
           </div>
