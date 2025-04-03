@@ -72,18 +72,22 @@ const SignupForm = () => {
                         onClick={async (event) => {
                             event.preventDefault();
                             try {
-                                const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
-                                    username,
-                                    password,
-                                    fullName,
-                                });
-                                if (response.status === 201 || response.status === 200) {
-                                    localStorage.setItem("username", username);
-                                    localStorage.setItem("signedIn", true);
-                                    navigate("/dashboard");
-                                } else {
-                                    console.error("Unexpected response:", response);
-                                    alert("Failed to create account. Please try again.");
+                                if(password==confirmPass){
+                                    const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
+                                        username,
+                                        password,
+                                        fullName,
+                                    });
+                                    if (response.status === 201 || response.status === 200) {
+                                        localStorage.setItem("username", username);
+                                        localStorage.setItem("signedIn", true);
+                                        navigate("/dashboard");
+                                    } else {
+                                        console.error("Unexpected response:", response);
+                                        alert("Failed to create account. Please try again.");
+                                    }
+                                }else{
+                                    alert("Passwords Do not Match")
                                 }
                             } catch (error) {
                                 console.error("Error during signup:", error);

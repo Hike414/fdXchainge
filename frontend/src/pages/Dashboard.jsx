@@ -63,6 +63,21 @@ function Dashboard() {
         fetchTokens();
     }, [userID]);
 
+    const [balance,setBalance] = useState(0);
+    useEffect(() => {
+            const fetchBalance = async () => {
+                const response = await axios.get("http://localhost:3000/api/v1/account/balance/"+userID);
+                if (response.status === 200) {
+                    console.log("Data fetched successfully");
+                    console.log(response.data)
+                    setBalance(response.data.balance);
+                } else {
+                    console.error("Error fetching data");
+                }
+            };
+            fetchBalance();
+        },[userID]);
+
     useEffect(() => {
         // Fetch recent transactions (mocked for now)
         setRecentTransactions([
@@ -93,10 +108,11 @@ function Dashboard() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-950 to-black">
             <div className="container mx-auto px-4 py-8">
-                <div className="mb-8">
+                <div className="mb-8 flex justify-between">
                     <h1 className="text-3xl font-bold text-white">Welcome {fullName}</h1>
-                    <p className="mt-2 text-purple-400">Manage your fixed deposits and create new ones</p>
+                    <h1 className="text-3xl font-bold text-white">Your Balance : {balance}</h1>
                 </div>
+                    <p className="mt-2 text-purple-400">Manage your fixed deposits and create new ones</p>
                 {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
                         <h2 className="text-xl font-bold">Total FD Value</h2>

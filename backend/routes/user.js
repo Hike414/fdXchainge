@@ -1,6 +1,6 @@
 const express = require("express")
 const zod = require("zod")
-const { User, FDToken ,FFDToken} = require("../db")
+const { User, FDToken ,FFDToken,Account} = require("../db")
 const jwt = require("jsonwebtoken")
 const JWT_SECRET = require("../config")
 const router = express.Router()
@@ -42,6 +42,10 @@ router.post('/signup', async (req, res) => {
         await FFDToken.create({
             user: userId,
             FFDTokens: [],
+        })
+        await Account.create({
+            userId,
+            balance: 10000
         })
         const token = jwt.sign({
             userId: dbUser._id

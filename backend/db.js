@@ -163,14 +163,32 @@ const listedTokenSchema = new mongoose.Schema({
         required : true
     }
 })
+
+const accountSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    balance: {
+        type: Number,
+        required: true
+    }
+});
+
+
+
+
 const User = new mongoose.model("User",userSchema)
 const FDToken = new mongoose.model("FDToken",FDtokenSchema)
 const FFDToken = new mongoose.model("FFDToken",FFDTokenSchema)
 const listedToken = new mongoose.model("listedToken",listedTokenSchema)
+const Account = new mongoose.model("Account",accountSchema)
 
 module.exports = {
     User,
     FDToken,
     FFDToken,
-    listedToken
+    listedToken,
+    Account
 };

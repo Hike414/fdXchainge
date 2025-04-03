@@ -11,6 +11,7 @@ const BuyToken = () => {
     const maturityDate = searchParams.get("maturityDate");
     const fileName = searchParams.get("fileName");
     const tokenId = searchParams.get("tokenId")
+    const price =  searchParams.get("price")
     
     useEffect(() => {
         const fetchUserId= async () => {
@@ -34,6 +35,13 @@ const BuyToken = () => {
         e.preventDefault();
         try {
             const response = await axios.put("http://localhost:3000/api/v1/marketplace/update-listed-token/" + UserId + "/" + tokenId);
+            const response2 = await axios.post("http://localhost:3000/api/v1/account/transfer/"+seller+"/"+ UserId+"/"+ price)
+            
+            if (response2.status === 200 || response2.status === 201 ) {
+                console.log('Amount successful:', response2.data);
+            } else {
+            console.error('Unexpected response status:', response.status);
+            }
             if (response.status === 200 || response.status === 201 ) {
                 console.log('Token purchase successful:', response.data);
                 Navigate("/buysuccess");
