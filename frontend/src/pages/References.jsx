@@ -33,7 +33,7 @@ const References = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % references.length);
-    }, 3000); // Change slide every 3 seconds
+    }, 5000); // Change slide every 5 seconds (increased from 3 seconds)
     return () => clearInterval(interval);
   }, []);
 

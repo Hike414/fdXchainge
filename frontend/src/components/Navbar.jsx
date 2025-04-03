@@ -3,7 +3,13 @@ import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const navigate = useNavigate();
-  
+  const isSignedIn = localStorage.getItem('username');
+
+  const handleSignOut = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('signedIn');
+    navigate('/');
+  };
 
   return (
     <nav className="relative px-6 py-4 bg-purple-900/40 backdrop-blur-lg border-white">
@@ -18,16 +24,25 @@ const Navbar = () => {
             FDXChainge
           </span>
         </div>
-          <div className="flex items-center">
+        <div className="flex items-center">
+          {isSignedIn ? (
+            <button
+              onClick={handleSignOut}
+              className="text-purple rounded-2xl px-5 py-1 text-xl cursor-pointer bg-white hover:bg-white transform hover:scale-110 transition-transform duration-200"
+            >
+              Sign Out
+            </button>
+          ) : (
             <button
               onClick={() => navigate('/signin')}
               className="text-purple rounded-2xl px-5 py-1 text-xl cursor-pointer bg-white hover:bg-white transform hover:scale-110 transition-transform duration-200"
             >
               Sign In
             </button>
-          </div>
-              </div>
-              {/* Mirror Effect Bottom Border */}
+          )}
+        </div>
+      </div>
+      {/* Mirror Effect Bottom Border */}
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
     </nav>
   )
