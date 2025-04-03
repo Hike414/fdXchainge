@@ -153,6 +153,10 @@ const listedTokenSchema = new mongoose.Schema({
     maturityDate : {
         type : Date,
         required : true,
+    },
+    fileName : {
+        type : String,
+        required : true
     }
 })
 const User = new mongoose.model("User",userSchema)

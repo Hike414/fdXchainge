@@ -15,6 +15,7 @@ const SellToken = () => {
     const int = searchParams.get("int");
     const name = searchParams.get("name");
     const vol =  searchParams.get("vol");
+    const fileName = searchParams.get("fileName");
 
     const  handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,6 +28,7 @@ const SellToken = () => {
                 RTI: interestRate,
                 seller: uid,
                 maturityDate: dur,
+                fileName : fileName
             });
             const response2 = await axios.put("http://localhost:3000/api/v1/ffd//update-ffd/"+uid+"/"+tid+"/"+tokens);
             const response3 = await axios.put("http://localhost:3000/api/v1/ffd//update-ffd/"+uid+"/"+tid);

@@ -8,6 +8,7 @@ const BuyToken = () => {
     const seller = searchParams.get("seller");
     const maturityDate = searchParams.get("maturityDate");
     const price = searchParams.get("price");
+    const fileName = searchParams.get("fileName");
 
     return (
         <div className="flex justify-center h-screen ">
@@ -15,6 +16,11 @@ const BuyToken = () => {
                 <div className=" h-min text-white max-w-md p-4 space-y-8 w-150 bg-[#0D1321] shadow-lg rounded-lg">
                     <div className="flex flex-col space-y-1.5 ">
                         <h2 className=" mb-10 text-4xl font-bold text-center">Summary</h2>
+                        <img
+                            src={"/uploads/" + fileName}
+                            alt={token}
+                            className="w-100 h-50 rounded-md border-2 "
+                        />
                         <h2 className="text-2xl font-bold text-center">Selected Token : {token}</h2>
                         <h2 className="text-2xl font-bold text-center">Rate of Interest: {int}</h2>
                         <h2 className="text-2xl font-bold text-center">Seller Address : {seller}</h2>
