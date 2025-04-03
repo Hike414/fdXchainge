@@ -254,7 +254,7 @@ function Dashboard() {
                             </div>
                         );
                     })}
-                    {data.length === 0 && (
+                    {data.filter(item => (item.sold && (item.owner === userID))).length === 0 && (
                         <div className="col-span-full text-center py-12 bg-[#0D1321] rounded-lg border-2 border-dashed border-gray-300">
                             <Landmark className="mx-auto text-white mb-3" size={32} />
                             <p className="text-white">No Shopped tokens yet!</p>
