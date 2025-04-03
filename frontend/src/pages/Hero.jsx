@@ -30,8 +30,7 @@ const Hero = () => {
                Where your money grows steadily, securely, and smartly
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
-              Why Break When You Can{' '}
-              <span className="text-purple-700 rounded-lg bg-white px-3">Trade?</span>
+              Why Break When You Can{' '} <span className=" bg-white px-3 text-purple-600 rounded-lg">Trade?</span>
             </h1>
             <p className="text-white/80 text-lg mb-8">
               Join the next generation of traders breaking free from traditional constraints. With fractionalized FDs, invest in smaller portions to diversify and maximize returns.
