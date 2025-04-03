@@ -129,6 +129,7 @@ function Dashboard() {
                                     <p>Bank: {token.bank}</p>
                                     <p>Plan: {token.plan}</p>
                                     <p>Duration: {token.duration} months</p>
+                                    <p>Maturity Date : {token.maturityDate.slice(0,10)}</p>
                                 </div>
                             </div>
                         );
@@ -163,6 +164,7 @@ function Dashboard() {
                                     <h2 className='text-2xl'>FD TokenID:{token.FDTokenId}</h2>
                                     <h2 className='text-2xl'>Price of Each Token :{token.amount}</h2>
                                     <h2 className='text-2xl'>Volume: {token.volume}</h2>
+                                    <h2 className='text-2xl'>Maturity Date : {token.maturityDate.slice(0,10)}</h2>
                                 </div>
                                 <div>
                                     <button
