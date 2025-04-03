@@ -160,11 +160,11 @@ function Dashboard() {
                                     />
                                 </div>
                                 <div className="space-y-2  text-md text-white">
-                                    <h2 className='text-2xl'>Token Name: {token.tokenName}</h2>
-                                    <h2 className='text-2xl'>FD TokenID:{token.FDTokenId}</h2>
-                                    <h2 className='text-2xl'>Price of Each Token :{token.amount}</h2>
-                                    <h2 className='text-2xl'>Volume: {token.volume}</h2>
-                                    <h2 className='text-2xl'>Maturity Date : {token.maturityDate.slice(0,10)}</h2>
+                                    <h2 className='text-lg'>Token Name: {token.tokenName}</h2>
+                                    <h2 className='text-lg'>FD TokenID: {token.FDTokenId}</h2>
+                                    <h2 className='text-lg'>Price of Each Token :{token.amount}</h2>
+                                    <h2 className='text-lg'>Volume: {token.volume}</h2>
+                                    <h2 className='text-lg'>Maturity Date : {token.maturityDate.slice(0,10)}</h2>
                                 </div>
                                 <div>
                                     <button
