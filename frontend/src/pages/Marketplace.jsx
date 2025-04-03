@@ -7,6 +7,8 @@ import axios from 'axios';
 const marketplace = () =>{
     const navigate = useNavigate();
     const [data,setData] = useState([]);
+    const [searchQuery, setSearchQuery] = useState(""); // State for search input
+
     useEffect(() => {
             const fetchData = async () => {
                 const response = await axios.get("http://localhost:3000/api/v1/marketplace/bulk");
@@ -19,6 +21,11 @@ const marketplace = () =>{
             };
             fetchData();
         },[]);
+
+    const filteredData = data.filter(item => 
+        item.tokenName.toLowerCase().includes(searchQuery.toLowerCase()) // Filter tokens by name
+    );
+
     return (
         <div className="min-h-screen"
             style={{
@@ -53,12 +60,15 @@ const marketplace = () =>{
                     <input 
                         type="text" 
                         placeholder="Search tokens..." 
+                        value={searchQuery} // Bind input value to state
+                        onChange={(e) => setSearchQuery(e.target.value)} // Update state on input change
                         className="p-2 w-1/2 rounded-lg border border-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400"
                     />
                     <button 
+                        onClick={() => setSearchQuery("")} // Clear search input
                         className="ml-4 p-2 text-white bg-purple-500 rounded-lg hover:bg-purple-600 font-bold cursor-pointer"
                     >
-                        Search
+                        Clear
                     </button>
                 </div>
             <table className="w-full border-collapse">
@@ -73,9 +83,9 @@ const marketplace = () =>{
                 </tr>
                 </thead>
                 <tbody>
-                {data.filter(item => !item.sold).map((item) => (
+                {filteredData.filter(item => !item.sold).map((item) => (
                     
-                    <tr className="border-b border-gray-700 text-xl">
+                    <tr className="border-b border-gray-700 text-xl" key={item.tokenID}>
                     <td className="p-2 flex items-center gap-3">
                         {/* <span>{item.icon}</span> */}
                         <img
