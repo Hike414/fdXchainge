@@ -23,6 +23,34 @@ router.post("/list-token", async (req, res) => {
 });
 
 
+router.put("/update-listed-token/:uid/:tid",async (req,res)=>{
+    const uid = req.params.uid;
+    const tid = req.params.tid;
+
+    try {
+        const updatedDocument = await listedToken.findOneAndUpdate(
+            { tokenID: tid },
+            { $set: { "sold": true, "owner": uid } },
+            { new: true }
+        );
+
+        if (!updatedDocument) {
+            return res.status(404).json({ message: "Token not found or could not be updated" });
+        }
+
+        res.json({
+            message: "Token updated successfully",
+            updatedDocument,
+        });
+    } catch (error) {
+        console.error("Error updating token:", error);
+        res.status(500).json({
+            message: "An error occurred while updating the token",
+            error: error.message,
+        });
+    }
+})
+
 router.get("/bulk", async (req, res) => {
     try {
         const tokens = await listedToken.find({});

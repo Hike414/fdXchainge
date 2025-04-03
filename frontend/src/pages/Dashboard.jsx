@@ -12,6 +12,21 @@ function Dashboard() {
     const [ffdTokens, setFFdTokens] = useState([]);
     const [recentTransactions, setRecentTransactions] = useState([]);
 
+    const [data,setData] = useState([]);
+    useEffect(() => {
+            const fetchData = async () => {
+                const response = await axios.get("http://localhost:3000/api/v1/marketplace/bulk");
+                if (response.status === 200) {
+                    console.log("Data fetched successfully");
+                    setData(response.data.data);
+                } else {
+                    console.error("Error fetching data");
+                }
+            };
+            fetchData();
+        },[]);
+
+
     useEffect(() => {
         const fetchFullName = async () => {
             const saved = localStorage.getItem('username');
@@ -211,6 +226,42 @@ function Dashboard() {
                         </div>
                     )}
                 </div>
+                <div className="mb-8">
+                    <h1 className="text-3xl pt-6 font-bold text-purple-400">Shopped Tokens</h1>
+                </div>
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    {data.filter(item => (item.sold && (item.owner === userID))).map((token) => {
+                        
+                        return (
+                            <div
+                                className="bg-[#0D1321] p-6 w-100 rounded-lg shadow-md "
+                            >
+                                <div className="flex items-center gap-3 mb-4">
+                                    <img
+                                        src={"/uploads/" + token.fileName}
+                                        alt={token.tokenName}
+                                        className="w-100 h-50 rounded-md border-2 "
+                                    />
+                                </div>
+                                <div className="space-y-2  text-md text-white">
+                                    <h2 className='text-lg'>Token Name : {token.tokenName}</h2>
+                                    <h2 className='text-lg'>TokenID : {token.tokenID}</h2>
+                                    <h2 className='text-lg'>Bought For :{token.price}</h2>
+                                    <h2 className='text-lg'>Bought From :{token.seller}</h2>
+                                    <h2 className='text-lg'>Maturity Date : {token.maturityDate.slice(0,10)}</h2>
+                                </div>
+                        
+                            </div>
+                        );
+                    })}
+                    {data.length === 0 && (
+                        <div className="col-span-full text-center py-12 bg-[#0D1321] rounded-lg border-2 border-dashed border-gray-300">
+                            <Landmark className="mx-auto text-white mb-3" size={32} />
+                            <p className="text-white">No Shopped tokens yet!</p>
+                        </div>
+                    )}
+                </div>
+
                 {/* <div className="mb-8">
                     <h1 className="text-3xl pt-5 font-bold text-purple-400">Recent Transactions</h1>
                 </div>

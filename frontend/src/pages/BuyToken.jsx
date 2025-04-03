@@ -1,14 +1,51 @@
-import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import {React, useState, useEffect} from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import axios from "axios";
 const BuyToken = () => {
-    const [amount, setAmount] = React.useState('');
+    const [UserId, setUserId] = useState('');
     const [searchParams] = useSearchParams();
+    const Navigate = useNavigate();
     const token = searchParams.get("id");
     const int = searchParams.get("int");
     const seller = searchParams.get("seller");
     const maturityDate = searchParams.get("maturityDate");
-    const price = searchParams.get("price");
     const fileName = searchParams.get("fileName");
+    const tokenId = searchParams.get("tokenId")
+    
+    useEffect(() => {
+        const fetchUserId= async () => {
+            const saved = localStorage.getItem('username');
+            if (saved) {
+                try {
+                    const response = await axios.get('http://localhost:3000/api/v1/user/getUser', {
+                        params: { username: saved },
+                    });
+                    if (response.status === 200) {
+                        setUserId(response.data.userId);
+                    }
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                }
+            }
+        };
+        fetchUserId();
+    }, []);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.put("http://localhost:3000/api/v1/marketplace/update-listed-token/" + UserId + "/" + tokenId);
+            if (response.status === 200 || response.status === 201 ) {
+                console.log('Token purchase successful:', response.data);
+                Navigate("/buysuccess");
+            } else {
+            console.error('Unexpected response status:', response.status);
+            }
+        } catch (error) {
+            console.error('Error during token purchase:', error);
+        }
+        
+    }
+
 
     return (
         <div className="flex justify-center h-screen ">
@@ -29,8 +66,9 @@ const BuyToken = () => {
                     <form className="space-y-4">
                         
                         <button
-                            type="button"
-                            className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            onClick={handleSubmit}
+                            type="submit"
+                            className="w-full bg-green-500 cursor-pointer text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
                             Buy Token
                         </button>

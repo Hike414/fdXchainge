@@ -91,7 +91,7 @@ const marketplace = () =>{
                     <td className="p-2">{item.maturityDate.slice(0,10)}</td>
                     <td className = "p-2">
                     <button onClick={()=>{
-                        navigate("/buytoken?id=" + item.tokenName + "&int=" + item.RTI + "&seller=" + item.seller + "&maturityDate=" + item.maturityDate.slice(0,10) + "&price=" + item.price + "&fileName=" + item.fileName + "&tokenId="+item._id);
+                        navigate("/buytoken?id=" + item.tokenName + "&int=" + item.RTI + "&seller=" + item.seller + "&maturityDate=" + item.maturityDate.slice(0,10) + "&price=" + item.price + "&fileName=" + item.fileName + "&tokenId="+item.tokenID);
                     }}
                      className='text-sm pl-5 pt-2 pb-2 pr-5 mb-2 text-white bg-green-500 rounded-lg hover:bg-green-600 font-bold cursor-pointer' >
                         BUY

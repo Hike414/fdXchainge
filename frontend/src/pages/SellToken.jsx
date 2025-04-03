@@ -27,6 +27,7 @@ const SellToken = () => {
                 price: tokens * parseInt(amt),
                 RTI: interestRate,
                 seller: uid,
+                owner : uid,
                 maturityDate: dur,
                 fileName : fileName
             });

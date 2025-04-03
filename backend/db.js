@@ -150,6 +150,10 @@ const listedTokenSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
+    owner : {
+        type : String,
+        required : true,
+    },
     maturityDate : {
         type : Date,
         required : true,
