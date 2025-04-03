@@ -17,23 +17,23 @@ const SignupForm = () => {
             style={{ backgroundImage: `url(${bgImage})` }}
         >
             <div className="bg-black bg-opacity-50 p-8 rounded-2xl w-96 shadow-lg">
-                <h2 className="text-purple-400 text-3xl font-semibold text-center mb-6">
+                <h2 className="text-purple-400 text-5xl font-semibold text-center mb-6">
                     Sign up
                 </h2>
                 <form>
                     <div className="mb-4">
-                        <label className="text-purple-300 block mb-1">Full Name</label>
+                        <label className="text-purple-300 text-2xl block mb-1">Full Name</label>
                         <input
                             onChange={(e) => {
                                 setFullName(e.target.value);
                             }}
                             placeholder="Full Name"
                             type="text"
-                            className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
+                            className="w-full text-xl p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="text-purple-300 block mb-1">Username</label>
+                        <label className="text-purple-300 text-2xl block mb-1">Username</label>
                     
                         <input
                             onChange={(e) => {
@@ -41,12 +41,12 @@ const SignupForm = () => {
                             }}
                             placeholder="Username"
                             type="text"
-                            className="w-full p-3 rounded-lg bg-gray-900 text-white placeholder-gray-400"
+                            className="w-full p-3 text-xl rounded-lg bg-gray-900 text-white placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-4 flex gap-4">
                         <div className="w-1/2">
-                            <label className="text-purple-300 block mb-1">Password</label>
+                            <label className="text-purple-300  block mb-1">Password</label>
                             <input
                                 onChange={(e) => {
                                     setPassword(e.target.value);
@@ -57,7 +57,7 @@ const SignupForm = () => {
                             />
                         </div>
                         <div className="w-1/2">
-                            <label className="text-purple-300 block mb-1">Confirm Password</label>
+                            <label className="text-purple-300  block mb-1">Confirm Password</label>
                             <input
                                 onChange={(e) => {
                                     setConfirmPass(e.target.value);

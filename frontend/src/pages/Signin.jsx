@@ -14,31 +14,31 @@ const Signin = () => {
       className="h-screen flex justify-center items-center bg-cover bg-center"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <div className="bg-black bg-opacity-50 p-8 rounded-2xl w-96 shadow-lg">
-        <h2 className="text-purple-400 text-3xl font-semibold text-center mb-6">
+      <div className="bg-black bg-opacity-50 p-8 rounded-2xl w-100 shadow-lg">
+        <h2 className="text-purple-400 text-5xl font-semibold text-center mb-6">
           Sign in
         </h2>
         <form>
           <div className="mb-4 relative">
-            <FaUser className="absolute left-3 top-3 text-purple-400" />
+            <FaUser className="absolute left-3 top-5 text-purple-400" />
             <input
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
               type="text"
               placeholder="Username"
-              className="w-full p-3 pl-10 rounded-lg bg-gray-900 text-white placeholder-gray-400"
+              className="w-full p-3 pl-10 rounded-lg bg-gray-900 text-white text-2xl placeholder-gray-400"
             />
           </div>
           <div className="mb-4 relative">
-            <FaLock className="absolute left-3 top-3 text-purple-400" />
+            <FaLock className="absolute left-3 top-5 text-purple-400" />
             <input
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
               type="password"
               placeholder="Password"
-              className="w-full p-3 pl-10 rounded-lg bg-gray-900 text-white placeholder-gray-400"
+              className="w-full p-3 pl-10 rounded-lg bg-gray-900 text-white text-xl placeholder-gray-400"
             />
           </div>
           <button
@@ -68,18 +68,25 @@ const Signin = () => {
                 );
               }
             }}
-            className="w-full bg-purple-500 cursor-pointer hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+            className="w-full bg-purple-500 text-xl cursor-pointer hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition duration-300"
           >
             Sign in
           </button>
-          <div className="pt-2 flex justify-between text-purple-300 text-sm mb-4">
-            <a href="#" className="hover:underline">
-              Forgot Password?
-            </a>
-            <a href="/signup" className="hover:underline">
-              Sign Up
-            </a>
-          </div>
+          <div className="text-center text-purple-300 mt-4">Don't have an account?</div>
+          <button
+            type="button"
+            onClick={() => {
+                try {
+                    navigate('/signup');
+                } catch (error) {
+                    console.error("Error during navigation:", error);
+                    alert("An error occurred while navigating. Please try again.");
+                }
+            }}
+            className="w-full bg-white text-xl cursor-pointer text-black font-semibold py-3 rounded-lg mt-2"
+        >
+            Sign up
+        </button>
         </form>
       </div>
     </div>

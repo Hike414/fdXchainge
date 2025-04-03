@@ -18,7 +18,7 @@ const Navbar = () => {
         {/* App Name */}
         <div className="flex items-center px-12">
           <span
-            className=" text-2xl font-bold cursor-pointer px-8 py-2 text-white"
+            className=" text-3xl font-bold cursor-pointer px-8 py-2 text-white"
             onClick={() => navigate('/')}
           >
             FDXChainge
@@ -28,14 +28,14 @@ const Navbar = () => {
           {isSignedIn ? (
             <button
               onClick={handleSignOut}
-              className="text-purple rounded-2xl px-5 py-1 text-xl cursor-pointer bg-purple-500 hover:bg-purple-600 transform hover:scale-110 transition-transform duration-200"
+              className="text-purple rounded-2xl mr-20 px-5 py-1 text-xl cursor-pointer bg-purple-500 hover:bg-purple-600 transform hover:scale-110 transition-transform duration-200"
             >
               Sign Out
             </button>
           ) : (
             <button
               onClick={() => navigate('/signin')}
-              className="text-purple rounded-2xl px-5 py-1 text-xl cursor-pointer bg-purple-500 hover:bg-purple-600 transform hover:scale-110 transition-transform duration-200"
+              className="text-purple rounded-2xl mr-20 px-5 py-1 text-xl cursor-pointer bg-purple-500 hover:bg-purple-600 transform hover:scale-110 transition-transform duration-200"
             >
               Sign In
             </button>

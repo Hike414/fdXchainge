@@ -1,5 +1,5 @@
 import {React,useEffect,useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useSearchParams} from 'react-router-dom';
 import bgImage from '../assets/BackgroundImage.png';
 import { ArrowLeft } from 'lucide-react';
 import axios from 'axios';
@@ -8,7 +8,8 @@ const marketplace = () =>{
     const navigate = useNavigate();
     const [data,setData] = useState([]);
     const [searchQuery, setSearchQuery] = useState(""); // State for search input
-
+    const [searchParams] = useSearchParams();
+    const uid = searchParams.get("uid");
     useEffect(() => {
             const fetchData = async () => {
                 const response = await axios.get("http://localhost:3000/api/v1/marketplace/bulk");
@@ -83,7 +84,7 @@ const marketplace = () =>{
                 </tr>
                 </thead>
                 <tbody>
-                {filteredData.filter(item => !item.sold).map((item) => (
+                {filteredData.filter(item =>!item.sold).map((item) => (
                     
                     <tr className="border-b border-gray-700 text-xl" key={item.tokenID}>
                     <td className="p-2 flex items-center gap-3">
@@ -103,7 +104,8 @@ const marketplace = () =>{
                     <button onClick={()=>{
                         navigate("/buytoken?id=" + item.tokenName + "&int=" + item.RTI + "&seller=" + item.seller + "&maturityDate=" + item.maturityDate.slice(0,10) + "&price=" + item.price + "&fileName=" + item.fileName + "&tokenId="+item.tokenID);
                     }}
-                     className='text-sm pl-5 pt-2 pb-2 pr-5 mb-2 text-white bg-green-500 rounded-lg hover:bg-green-600 font-bold cursor-pointer' >
+                    disabled = {item.owner===uid}
+                     className='text-sm pl-5 pt-2 pb-2 pr-5 mb-2 disabled:bg-gray-300 text-white bg-green-500 rounded-lg hover:bg-green-600 font-bold cursor-pointer' >
                         BUY
                     </button>
                     </td>

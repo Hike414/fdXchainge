@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PlusCircle, Landmark, ShoppingBagIcon } from 'lucide-react';
+import { PlusCircle, Landmark, ShoppingBagIcon, FileText, PieChart,ChartNoAxesCombined} from 'lucide-react';
 import bgImage from '../assets/BackgroundImage.png';
 import axios from 'axios';
 
@@ -96,7 +96,7 @@ function Dashboard() {
         const maturityDate = new Date(token.maturityDate);
         const today = new Date();
         if (maturityDate > today) {
-            const interest = (token.amount * token.interestRate * token.duration) / (100 * 12);
+            const interest = (token.amount * token.interestRate ) / (100);
             return interest;
         }
         return sum;
@@ -108,45 +108,65 @@ function Dashboard() {
     return (
         <div className="min-h-screen bg-purple-950">
             <div className="container mx-auto px-4 py-8">
-                <div className="mb-8 flex justify-between">
-                    <h1 className="text-3xl font-bold text-white">Welcome {fullName}</h1>
-                    <h1 className="text-3xl font-bold text-white">Your Balance : {balance}</h1>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
-                        <h2 className="text-xl font-bold">Total FD Value</h2>
-                        <p className="text-2xl">₹{totalFDValue.toFixed(2)}</p>
-                    </div>
-                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
-                        <h2 className="text-xl font-bold">Total Interest Payout</h2>
-                        <p className="text-2xl">₹{totalInterestPayout.toFixed(2)}</p>
-                    </div>
-                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
-                        <h2 className="text-xl font-bold">Upcoming Interest Payout</h2>
-                        <p className="text-2xl">₹{upcomingInterestPayout.toFixed(2)}</p>
-                    </div>
-                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
-                        <h2 className="text-xl font-bold">Active FDs</h2>
-                        <p className="text-2xl">{activeFDs}</p>
-                    </div>
-                </div>
-                
-                <div className='flex justify-between gap-4'>
+                <div className=" flex items-center justify-between">
+                    <div>
+
+                    <h1 className="text-3xl mt-10 ml-4 font-bold text-white">Welcome {fullName}👋</h1>
+                    <div className='flex gap-6'>
                     <button
                         onClick={() => navigate('/create-fd')}
-                        className="mb-8 flex mt-5  items-center gap-2 cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors"
+                        className="mb-8 flex mt-5 text-xl items-center gap-2 cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors"
                         >
-                        <PlusCircle size={20} />
+                        <FileText size={20} />
                         Create New FD
                     </button>
                     <button
-                        onClick={() => navigate('/marketplace')}
-                        className="mb-8 flex mt-5 items-center gap-2 cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors"
+                        onClick={() => navigate('/marketplace?uid='+userID)}
+                        className="mb-8 flex mt-5 text-xl items-center gap-2 cursor-pointer bg-purple-500  text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors"
                         >
-                        <ShoppingBagIcon size={20} />
+                        <ChartNoAxesCombined />
                         View Marketplace
                     </button>
+                    </div>
                 </div>
+                    <div>
+                        <h1 className="text-s font-bold text-white">Your Balance</h1>
+                        <h1 className="text-5xl font-bold text-white"> ₹{balance}</h1>
+                        <button onClick={async () => {
+
+                            const addmoney = await axios.post("http://localhost:3000/api/v1/account/transfer/"+userID);
+                            if (addmoney.status === 200) {
+                                console.log("Money Added Successfully")
+                                window.location.reload(true);
+                            } else {
+                                console.error("Error Adding Money");
+                            }
+                        }
+                        }
+                         className='text-black rounded-2xl m-2 p-2 text-xl cursor-pointer bg-green-500 border-1 hover:bg-green-600 '>Add Money</button>
+                    </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                        <h2 className="text-xl font-bold">Total FD Value</h2>
+                        <p className="text-green-600 font-bold text-4xl">₹{totalFDValue.toFixed(2)}</p>
+                    </div>
+                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                        <h2 className="text-xl font-bold">Total Interest Payout</h2>
+                        <p className="text-green-600 font-bold text-4xl">₹{totalInterestPayout.toFixed(2)}</p>
+                    </div>
+                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                        <h2 className="text-xl font-bold">Upcoming Interest Payout</h2>
+                        <p className="text-green-600 font-bold text-4xl">₹{upcomingInterestPayout.toFixed(2)}</p>
+                    </div>
+                    <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
+                        <h2 className="text-xl font-bold">Active FDs</h2>
+                        <p className="text-green-600 font-bold text-4xl">{activeFDs}</p>
+                    </div>
+                </div>
+                
+                
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-purple-400">My FD Tokens</h1>
                 </div>
@@ -159,25 +179,25 @@ function Dashboard() {
                                 key={token.tokenID}
                                 className="bg-[#0D1321] p-6 rounded-lg shadow-md "
                             >
-                                <div className="flex items-center gap-3 mb-4">
-                                    <Landmark className="text-purple-600" size={24} />
-                                    <h3 className="text-lg  text-white font-semibold">{token.tokenID}</h3>
+                                <div className="flex justify-between items-center gap-3 mb-4">
+                                    <h3 className="text-2xl flex gap-4 items-center  text-white font-semibold"><Landmark className="text-purple-600" size={24} />{token.tokenID}</h3>
                                     <div>
                                         <button onClick={()=>
                                             navigate("/fractionalise?tid="+ token.tokenID+"&uid="+userID+"&amt="+token.amount+"&dur="+token.maturityDate+"&int="+token.interestRate)
                                         }
                                         disabled={token.fractionalised}
-                                         className="ml-20 flex items-center cursor-pointer disabled:bg-red-400 disabled:cursor-not-allowed disabled:text-black bg-green-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
-                                            Fractionlize
+                                         className=" flex items-center cursor-pointer disabled:bg-red-400 disabled:cursor-not-allowed disabled:text-black bg-green-500  text-white text-xl p-3 rounded-lg hover:bg-green-600 transition-colors">
+                                            Fractionalize 
+                                            <PieChart className='ml-2' size={20}/>
                                         </button>
                                     </div>
                                 </div>
-                                <div className="space-y-2 text-md text-white">
-                                    <p>Amount: ₹{token.amount}</p>
-                                    <p>Bank: {token.bank}</p>
-                                    <p>Plan: {token.plan}</p>
-                                    <p>Duration: {token.duration} months</p>
-                                    <p> Interest Rate: {token.interestRate} </p>
+                                <div className="space-y-2 text-lg text-white">
+                                    <p>Amount : ₹{token.amount}</p>
+                                    <p>Bank : {token.bank}</p>
+                                    <p>Plan : {token.plan}</p>
+                                    <p>Duration : {token.duration} months</p>
+                                    <p> Interest Rate : {token.interestRate}% </p>
                                     <p>Maturity Date : {token.maturityDate.slice(0,10)}</p>
                                 </div>
                             </div>
@@ -209,10 +229,10 @@ function Dashboard() {
                                     />
                                 </div>
                                 <div className="space-y-2  text-md text-white">
-                                    <h2 className='text-lg'>Token Name: {token.tokenName}</h2>
-                                    <h2 className='text-lg'>FD TokenID: {token.FDTokenId}</h2>
-                                    <h2 className='text-lg'>Price of Each Token :{token.amount}</h2>
-                                    <h2 className='text-lg'>Volume: {token.volume}</h2>
+                                    <h2 className='text-lg'>Token Name : {token.tokenName}</h2>
+                                    <h2 className='text-lg'>FD TokenID : {token.FDTokenId}</h2>
+                                    <h2 className='text-lg'>Price of Each Token : {token.amount}</h2>
+                                    <h2 className='text-lg'>Volume : {token.volume}</h2>
                                     <h2 className='text-lg'>Maturity Date : {token.maturityDate.slice(0,10)}</h2>
                                 </div>
                                 <div>
@@ -221,6 +241,7 @@ function Dashboard() {
                                         onClick={()=>navigate("/selltoken?tid="+token._id+"&uid="+userID+"&amt="+token.amount+"&dur="+token.maturityDate+"&int="+token.interestRate+"&vol="+token.volume+"&name="+token.tokenName+"&fileName="+token.image.filename)}
                                         disabled={token.listed}
                                         className=' mt-10 ml-20 flex items-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed  bg-green-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-green-600 transition-colors'>
+                                            
                                             Sell This Token
                                         </button>
                                     ):(
@@ -261,8 +282,11 @@ function Dashboard() {
                                 <div className="space-y-2  text-md text-white">
                                     <h2 className='text-lg'>Token Name : {token.tokenName}</h2>
                                     <h2 className='text-lg'>TokenID : {token.tokenID}</h2>
-                                    <h2 className='text-lg'>Bought For :{token.price}</h2>
-                                    <h2 className='text-lg'>Bought From :{token.seller}</h2>
+                                    <h2 className='text-lg'>Bought For : {token.price}</h2>
+                                    <h2 className='text-lg'>Bought From : {token.seller}</h2>
+                                    <h2 className='text-lg'>Rate Of Interest : {token.RTI}%</h2>
+                                    <h2 className='text-lg'>Upcoming Interest Payout : {parseFloat(token.RTI)*parseInt(token.price)/100}</h2>
+                                    
                                     <h2 className='text-lg'>Maturity Date : {token.maturityDate.slice(0,10)}</h2>
                                 </div>
                         
@@ -277,7 +301,7 @@ function Dashboard() {
                     )}
                 </div>
 
-                <div className="mb-8">
+                {/* <div className="mb-8">
                     <h1 className="text-3xl pt-5 font-bold text-purple-400">Recent Transactions</h1>
                 </div>
                 <div className="bg-[#0D1321] p-6 rounded-lg shadow-md text-white">
@@ -301,7 +325,7 @@ function Dashboard() {
                             ))}
                         </tbody>
                     </table>
-                </div>
+                </div> */}
             </div>
         </div>
     );

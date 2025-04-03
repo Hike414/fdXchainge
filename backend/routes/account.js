@@ -51,5 +51,24 @@ router.post("/transfer/:to/:from/:amt", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+router.post("/transfer/:to", async (req, res) => {
+    try {
+        const to = req.params.to;
+        const account = await Account.findOne({ userId: to });
+        if (!account) {
+            return res.status(404).json({ error: "Recipient account not found" });
+        }
+
+        await Account.updateOne(
+            { userId: to },
+            { $inc: { balance: 5000 } }
+        );
+        
+        res.json({ message: "Transfer successful" });
+    } catch (error) {
+        console.error("Error processing transfer:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
 module.exports = router;
