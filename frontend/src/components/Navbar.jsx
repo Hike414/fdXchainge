@@ -16,13 +16,17 @@ const Navbar = () => {
       <div className="absolute inset-0 backdrop-blur-sm"></div>
       <div className="relative flex items-center justify-between">
         {/* App Name */}
-        <div className="flex items-center px-12">
+        <div className="items-center px-12">
           <span
-            className=" text-3xl font-bold cursor-pointer px-8 py-2 text-white"
+            className="flex text-3xl  cursor-pointer px-8 py-2 text-white"
             onClick={() => navigate('/')}
           >
-            FDXChainge
+            <p className='text-5xl font-bold'>FDX</p>
+            <p className='pt-3 flex font-bold text-3xl'>
+              <p className='text-green-500'>Chain</p>ge
+            </p>
           </span>
+          <h1 className='text-white ml-8 font-style : italic'>Blockchain Based Tokenised Deposit Platform</h1>
         </div>
         <div className="flex items-center">
           {isSignedIn ? (
