@@ -30,12 +30,12 @@ const references = [
 const References = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % references.length);
-    }, 5000); // Change slide every 5 seconds (increased from 3 seconds)
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentIndex((prevIndex) => (prevIndex + 1) % references.length);
+  //   }, 5000); // Change slide every 5 seconds (increased from 3 seconds)
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const getVisibleReferences = () => {
     const visible = [];

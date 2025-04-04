@@ -97,7 +97,7 @@ const marketplace = () =>{
                         {item.tokenName}
                     </td>
                     <td className="p-2">{item.price}</td>
-                    <td className="p-2">{item.RTI}</td>
+                    <td className="p-2">{item.RTI}%</td>
                     <td className="p-2">{item.seller}</td>
                     <td className="p-2">{item.maturityDate.slice(0,10)}</td>
                     <td className = "p-2">

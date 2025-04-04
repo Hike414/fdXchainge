@@ -240,8 +240,7 @@ function Dashboard() {
                                         <button
                                         onClick={()=>navigate("/selltoken?tid="+token._id+"&uid="+userID+"&amt="+token.amount+"&dur="+token.maturityDate+"&int="+token.interestRate+"&vol="+token.volume+"&name="+token.tokenName+"&fileName="+token.image.filename)}
                                         disabled={token.listed}
-                                        className=' mt-10 ml-20 flex items-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed  bg-green-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-green-600 transition-colors'>
-                                            
+                                        className=' mt-10 ml-20 flex items-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed  bg-green-500  text-white text-lg px-6 py-3 rounded-lg hover:bg-green-600 transition-colors'> 
                                             Sell This Token
                                         </button>
                                     ):(
@@ -265,12 +264,12 @@ function Dashboard() {
                 <div className="mb-8">
                     <h1 className="text-3xl pt-6 font-bold text-purple-400">Shopped Tokens</h1>
                 </div>
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-40 md:grid-cols-2 lg:grid-cols-4">
                     {data.filter(item => (item.sold && (item.owner === userID))).map((token) => {
                         
                         return (
                             <div
-                                className="bg-[#0D1321] p-6 w-100 rounded-lg shadow-md "
+                                className="bg-[#0D1321] gap-6 p-6 w-100 rounded-lg shadow-md "
                             >
                                 <div className="flex items-center gap-3 mb-4">
                                     <img
